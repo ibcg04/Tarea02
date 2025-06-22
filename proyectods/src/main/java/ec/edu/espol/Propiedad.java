@@ -8,4 +8,31 @@ public class Propiedad {
     private Anfitrion propietario;
     private ArrayList<Reseña> reseñas;
 
+    public void mostrarUnidades(){
+        for(Unidad u : unidades){
+            System.out.println(u);
+        }
+        
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public ArrayList<Unidad> getUnidades() {
+        return unidades;
+    }
+
+    public Anfitrion getPropietario() {
+        return propietario;
+    }
+
+    public ArrayList<Reseña> getReseñas() {
+        return reseñas;
+    }
+
+    @Override
+    public String toString() {
+        return "Propiedad{" + "ubicacion=" + ubicacion + ", unidades=" + unidades + ", propietario=" + propietario + ", reseñas=" + reseñas + '}';
+    }   
 }

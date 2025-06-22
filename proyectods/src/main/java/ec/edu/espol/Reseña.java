@@ -5,6 +5,18 @@ public class Reseña {
     private String descripcion;
     private Usuario autor;
 
+    public int getCalificacion() {
+        return calificacion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public Usuario getAutor() {
+        return autor;
+    }
+
 
     
 }
