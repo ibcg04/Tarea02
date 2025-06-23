@@ -8,6 +8,13 @@ public class Propiedad {
     private Anfitrion propietario;
     private ArrayList<Reseña> reseñas;
 
+    public Propiedad(String ubicacion, ArrayList<Unidad> unidades, Anfitrion propietario, ArrayList<Reseña> reseñas) {
+        this.ubicacion = ubicacion;
+        this.unidades = unidades;
+        this.propietario = propietario;
+        this.reseñas = reseñas;
+    }
+
     public void mostrarUnidades(){
         for(Unidad u : unidades){
             System.out.println(u);
