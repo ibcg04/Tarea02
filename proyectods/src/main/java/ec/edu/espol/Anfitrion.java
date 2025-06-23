@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Anfitrion extends Usuario implements ResuelveReporte{
-    public Anfitrion(String nombre, ArrayList<Reseña> reseñas) {
+    public Anfitrion(String nombre) {
         super(nombre);
     }
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Huesped extends Usuario {
     private Unidad unidadOcupada;
 
-    public Huesped(String nombre, ArrayList<Reseña> reseñas) {
+    public Huesped(String nombre) {
         super(nombre);
     }
 
