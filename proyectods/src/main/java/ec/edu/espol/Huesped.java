@@ -51,6 +51,7 @@ public class Huesped extends Usuario {
         ArrayList<Propiedad> propiedades_nuevas = new ArrayList<>();
         System.out.println("Buscando propiedades.....");
         for(Anfitrion a: DataBase.getDataBase().getAnfitriones()){
+            if (a.getPropiedades() !=  null){
             for(Propiedad p: a.getPropiedades()){
                 if(p.getUbicacion().equals(ubicacion)){
                     for(Reseña r: p.getReseñas()){
@@ -59,6 +60,7 @@ public class Huesped extends Usuario {
                     }
                    
                 }   
+            }
         }
         mostrarPropiedades(propiedades_nuevas); 
         }
