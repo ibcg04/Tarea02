@@ -64,17 +64,4 @@ public class Huesped extends Usuario {
         }
         return propiedades_nuevas;
     }
-
-      public Reseña reseñar(){
-        return new Reseña();
     }
-
-     public void mostrarPropiedades(ArrayList<Propiedad> propiedades){
-        System.out.println("Propiedades disponibles:");
-        
-        //for(Propiedad p: propiedades){
-        //    System.out.println(p);
-        //}
-    }
-
-}

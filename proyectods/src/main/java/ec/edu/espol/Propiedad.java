@@ -33,6 +33,6 @@ public class Propiedad {
 
     @Override
     public String toString() {
-        return "Propiedad{" + "ubicacion=" + ubicacion + ", unidades=" + unidades + ", propietario=" + propietario + ", reseñas=" + reseñas + '}';
+        return "Propiedad{" + "Ubicacion=" + ubicacion + ", Unidades=" + unidades + ", Propietario=" + propietario + ", Reseñas=" + reseñas + '}';
     }   
 }
