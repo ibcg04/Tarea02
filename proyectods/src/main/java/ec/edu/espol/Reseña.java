@@ -5,6 +5,14 @@ public class Reseña {
     private String descripcion;
     private Usuario autor;
 
+    
+
+    public Reseña(int calificacion, String descripcion, Usuario autor) {
+        this.calificacion = calificacion;
+        this.descripcion = descripcion;
+        this.autor = autor;
+    }
+
     public int getCalificacion() {
         return calificacion;
     }

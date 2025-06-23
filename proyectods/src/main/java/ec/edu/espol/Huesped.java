@@ -5,6 +5,11 @@ import java.util.ArrayList;
 public class Huesped extends Usuario {
     private Unidad unidadOcupada;
 
+    public Huesped(String nombre, ArrayList<Reseña> reseñas) {
+        super(nombre);
+    }
+
+
     public void Reportar(String mensaje){
 
         System.out.println("Reporte enviado");
@@ -31,8 +36,10 @@ public class Huesped extends Usuario {
         }
     }
 
-    public Reseña reseñar(){
-        return new Reseña();
+    public Reseña reseñar(int calificacion, String descripcion){
+        Reseña resenia = new Reseña(calificacion, descripcion, this);
+        this.getReseñas().add(resenia);
+        return resenia;
     }
 
     public Reporte reportar(Huesped autor, String mensaje){

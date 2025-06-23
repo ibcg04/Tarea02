@@ -1,16 +1,23 @@
 package ec.edu.espol;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Anfitrion extends Usuario implements ResuelveReporte{
-    private ArrayList<Propiedad> propiedades;
-
-    public Regla establecerregla(){
-        return new Regla();
+    public Anfitrion(String nombre, ArrayList<Reseña> reseñas) {
+        super(nombre);
     }
 
-    public Reseña reseñar(){
-        return new Reseña();
+    private ArrayList<Propiedad> propiedades;
+
+    public Regla establecerregla(Date chIn, Date chOut, String restricciones){
+        return new Regla(chIn,chOut,restricciones);
+    }
+
+    public Reseña reseñar(int calificacion, String descripcion){
+        Reseña resenia = new Reseña(calificacion, descripcion, this);
+        this.getReseñas().add(resenia);
+        return resenia;
     }
 
     @Override
