@@ -12,17 +12,16 @@ public class Main {
         ArrayList<Unidad> unidades = new ArrayList<>();
         unidades.add(casa);
 
+        // Reseña con calificación 5 (cumple el filtro de búsqueda >= 4)
         Reseña resenia = new Reseña(5, "Excelente lugar", anfitrion);
         ArrayList<Reseña> resenias = new ArrayList<>();
         resenias.add(resenia);
 
+        // Propiedad en Guayaquil
         Propiedad propiedad = new Propiedad("Guayaquil", unidades, anfitrion, resenias);
 
         ArrayList<Propiedad> propiedadesAnfitrion = new ArrayList<>();
         propiedadesAnfitrion.add(propiedad);
-
-        // Asignar propiedades al anfitrión (por defecto el atributo es privado, pero puedes agregar un setter)
-        // anfitrion.setPropiedades(propiedadesAnfitrion);
 
         // 2. Agregar anfitrión a la base de datos
         DataBase.getDataBase().getAnfitriones().add(anfitrion);
