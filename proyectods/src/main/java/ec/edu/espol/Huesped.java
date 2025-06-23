@@ -5,7 +5,13 @@ import java.util.ArrayList;
 public class Huesped extends Usuario {
     private Unidad unidadOcupada;
 
-    public void setUnidadOcupada(Unidad unidadOcupada) {
+    public void Reportar(String mensaje){
+
+        System.out.println("Reporte enviado");
+        
+    }   
+
+        public void setUnidadOcupada(Unidad unidadOcupada) {
         this.unidadOcupada = unidadOcupada;
     }
 
@@ -32,7 +38,6 @@ public class Huesped extends Usuario {
     public Reporte reportar(Huesped autor, String mensaje){
         return new Reporte(autor, mensaje);
     }
-
     public void mostrarPropiedades(ArrayList<Propiedad> propiedades){
         System.out.println("Propiedades disponibles:");
         
@@ -40,7 +45,6 @@ public class Huesped extends Usuario {
             System.out.println(p);
         }
     }
-    
 
     public ArrayList<Propiedad> buscarPropiedades(String ubicacion, int calificacion){
         //Busca propiedades en la ubicación y con la reseña.
