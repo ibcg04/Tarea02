@@ -1,5 +1,7 @@
 package ec.edu.espol;
 
-public abstract class Notificador {
-    public abstract void notificar(String mensaje);
+public class Notificador {
+    public void notificar(String mensaje) {
+        System.out.println("Enviando: " + mensaje);
+    }
 }
