@@ -15,7 +15,7 @@ public class Anfitrion extends Usuario implements ResuelveReporte{
 
     @Override
     public void resolverReporte(Reporte r) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("Incidente resuelto");
     }
    
     public ArrayList<Propiedad> getPropiedades() {

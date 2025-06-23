@@ -9,6 +9,6 @@ public class NotificadorBase extends Notificador {
 
     @Override
     public void notificar(String mensaje) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("Enviando: " + mensaje);
     }
 }
