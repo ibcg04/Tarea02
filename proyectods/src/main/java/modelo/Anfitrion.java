@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Anfitrion extends Usuario implements ResuelveReporte {
     private ArrayList<Propiedad> propiedades;
@@ -28,7 +29,7 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
 
     @Override
     public void resolverReporte(Reporte r) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("Incidente resuelto");
     }
    
 
