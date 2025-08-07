@@ -33,7 +33,7 @@ public class HuespedManager {
                 break;
             case 5:
                 System.out.println("Volviendo al menú principal...");
-                MenuHuesped.mostrarMenu(huesped);
+                MenuHuesped.mostrarMenu(huesped, sc);
                 break;
             default:
                 break;

@@ -1,69 +1,74 @@
 package ec.edu.espol;
 import java.util.Scanner;
+
+import modelo.Anfitrion;
 import modelo.BaseDatos;
 import modelo.Huesped;
 
 public class InicioSesion {
-    public static void iniciarSesionHuesped() {
+    public static void iniciarSesionHuesped(Scanner sc) {
         System.out.println("==========Inicio de sesión Huesped==========");
         BaseDatos db = BaseDatos.getDataBase();
-        if(db.hasHuesped()){
+
+        if (!db.hasHuespedes()) {
+            System.out.println("Error no existen Huespedes registrados. Registrese como Huesped y vuelva a intentar");
+            return;
+        }
+
+        while (true) {
+            System.out.println("Seleccione el ID del Huesped para iniciar sesión:");
             db.mostrarHuespedes();
             System.out.println("0. Salir");
 
-            Scanner sc = new Scanner(System.in);
             int opcion = sc.nextInt();
+            sc.nextLine();
 
             if (opcion == 0) {
                 System.out.println("Saliendo del programa...");
-                sc.close();
-                Main.gestionarAplicacion(); // Termina el programa
+                return;
             }
-            if (db.getHuespedes().containsKey(opcion)) {
+            else if (db.getHuespedes().containsKey(opcion)) {
                 System.out.println("Sesión iniciada como Huesped con ID: " + opcion);
                 Huesped huesped = db.getHuespedes().get(opcion);
-                MenuHuesped.mostrarMenu(huesped);
-            } else {
+                MenuHuesped.mostrarMenu(huesped, sc);
+                return;
+            } 
+            else {
                 System.out.println("ID de Huesped no encontrado. Intente nuevamente.");
-                iniciarSesionHuesped(); // Vuelve a intentar iniciar sesión
             }
-        
-            sc.close();
         }
-        else{
-            System.out.println("Error no existen Huespedes registrados. Registrese como Huesped y vuelva a intentar");
-            Main.gestionarAplicacion();  
-        }
-
     }
 
-    public static void iniciarSesionAnfitrion() {
+    public static void iniciarSesionAnfitrion(Scanner sc) {
         System.out.println("==========Inicio de sesión Anfitrión==========");
         BaseDatos db = BaseDatos.getDataBase();
-        if(db.hasAnfitrion()){
+
+        if (!db.hasAnfitriones()) {
+            System.out.println("Error no existen Anfitriones registrados. Registrese como Anfitrion y vuelva a intentar");
+            return;
+        }
+
+        while (true) {
+            System.out.println("Seleccione el ID del Anfitrión para iniciar sesión:");
             db.mostrarAnfitriones();
             System.out.println("0. Salir");
 
-            Scanner sc = new Scanner(System.in);
             int opcion = sc.nextInt();
+            sc.nextLine();
 
             if (opcion == 0) {
                 System.out.println("Saliendo del programa...");
-                sc.close();
-                Main.gestionarAplicacion();
+                return;
             }
-            if (db.getAnfitriones().containsKey(opcion)) {
+            else if (db.getAnfitriones().containsKey(opcion)) {
                 System.out.println("Sesión iniciada como Anfitrión con ID: " + opcion);
-            } else {
+                Anfitrion anfitrion = db.getAnfitriones().get(opcion);
+                MenuAnfitrion.mostrarMenu(anfitrion, sc);
+                return;
+            } 
+            else {
                 System.out.println("ID de Anfitrión no encontrado. Intente nuevamente.");
-                iniciarSesionAnfitrion(); // Vuelve a intentar iniciar sesión
             }
-
-            sc.close();
-        }
-        else{
-            System.out.println("Error no existen Anfitriones registrados. Registrese como Anfitrion y vuelva a intentar");
-            Main.gestionarAplicacion();
         }
     }
 }
