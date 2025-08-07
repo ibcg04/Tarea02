@@ -83,4 +83,10 @@ public class Huesped extends Usuario {
         return propiedades_nuevas;
 
         }
+
+    @Override
+    public String toString() {
+        return "Huesped " + getNombre() + ", getID()=" + getID()
+                + "]";
+    }
     }

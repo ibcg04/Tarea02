@@ -18,13 +18,11 @@ public class RegistrarUsuario {
         switch (opcion) {
             case 1:
                 System.out.println("Registrando nuevo Huesped...");
-                sc.close();
-                registrarHuesped();
+                registrarHuesped(sc);
                 break;
             case 2:
                 System.out.println("Registrando nuevo Anfitrión...");
-                sc.close();
-                registrarAnfitrion();
+                registrarAnfitrion(sc);
                 break;
             case 3:
                 System.out.println("Volviendo al menú principal...");
@@ -36,9 +34,9 @@ public class RegistrarUsuario {
         }
     }
 
-    public static void registrarHuesped() {
-        Scanner sc = new Scanner(System.in);
+    public static void registrarHuesped(Scanner sc) {
         System.out.println("Ingrese el nombre del Huesped:");
+        sc.nextLine();
         String nombre = sc.nextLine();
         System.out.println("Ingrese el ID del Huesped:");
         int id = sc.nextInt();
@@ -47,25 +45,21 @@ public class RegistrarUsuario {
         BaseDatos db = BaseDatos.getDataBase();
         db.agregarHuesped(huesped);
 
-        System.out.println("Huesped registrado exitosamente: " + huesped);
-        sc.close();
+        System.out.println("Huesped registrado exitosamente: " + huesped.toString());
 
         Main.gestionarAplicacion();
     }
 
-    public static void registrarAnfitrion() {
-        Scanner sc = new Scanner(System.in);
+    public static void registrarAnfitrion(Scanner sc) {
         System.out.println("Ingrese el nombre del Anfitrión:");
         String nombre = sc.nextLine();
         System.out.println("Ingrese el ID del Anfitrión:");
         int id = sc.nextInt();
-
         Anfitrion anfitrion = new Anfitrion(nombre, id);
         BaseDatos db = BaseDatos.getDataBase();
         db.agregarAnfitrion(anfitrion);
 
         System.out.println("Anfitrión registrado exitosamente: " + anfitrion);
-        sc.close();
 
         Main.gestionarAplicacion();
     }
