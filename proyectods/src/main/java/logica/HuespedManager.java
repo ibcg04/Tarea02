@@ -1,8 +1,9 @@
 package logica;
 
 import java.util.Scanner;
+
+import ec.edu.espol.MenuHuesped;
 import modelo.BaseDatos;
-import MenuHuesped;
 import modelo.Huesped;
 
 public class HuespedManager {

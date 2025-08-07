@@ -1,3 +1,4 @@
+package ec.edu.espol;
 import java.util.Scanner;
 import modelo.BaseDatos;
 import modelo.Huesped;

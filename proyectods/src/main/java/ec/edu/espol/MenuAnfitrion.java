@@ -1,3 +1,4 @@
+package ec.edu.espol;
 import modelo.Anfitrion;
 
 public class MenuAnfitrion {

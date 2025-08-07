@@ -1,3 +1,4 @@
+package ec.edu.espol;
 import modelo.Huesped;
 import java.util.Scanner;
 

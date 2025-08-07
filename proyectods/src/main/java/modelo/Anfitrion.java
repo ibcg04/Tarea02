@@ -19,9 +19,16 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
         this.propiedades = new ArrayList<>();
     }
 
-    public Regla establecerregla(){
-        return new Regla();
+    public Regla establecerregla(String descripcion){
+        return new Regla(descripcion);
     }
+    public Regla establecerHorarioCheck(Date checkIn, Date checkOut){
+        return new CheckInCheckOut(checkIn,checkOut);
+    }
+    public Regla establecerRestriccion(String restriccion){
+        return new Restriccion(restriccion);
+    }
+
 
     public Reseña reseñar(int calificacion, String descripcion){
         return new Reseña(calificacion, descripcion, this);

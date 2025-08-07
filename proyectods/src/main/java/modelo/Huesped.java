@@ -5,11 +5,11 @@ import modelo.BaseDatos;
 
 public class Huesped extends Usuario {
     private Unidad unidadOcupada;
-
+/* 
     public Huesped(String nombre) {
         super(nombre);
     }
-
+*/
 
     public void Reportar(String mensaje){
 
@@ -68,7 +68,7 @@ public class Huesped extends Usuario {
         //Busca propiedades en la ubicación y con la reseña.
         ArrayList<Propiedad> propiedades_nuevas = new ArrayList<>();
         System.out.println("Buscando propiedades...");
-        for(Anfitrion a: BaseDatos.getDataBase().getAnfitriones()){
+        for(Anfitrion a: BaseDatos.getDataBase().getAnfitriones().values()){
             for(Propiedad p: a.getPropiedades()){
                 if(p.getUbicacion().equals(ubicacion)){
                     for(Reseña r: p.getReseñas()){
@@ -80,7 +80,7 @@ public class Huesped extends Usuario {
             }
         }
         mostrarPropiedades(propiedades_nuevas); 
-        }
         return propiedades_nuevas;
-    }
+
+        }
     }

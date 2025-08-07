@@ -74,4 +74,11 @@ public class BaseDatos {
     public void eliminarHuesped(int id) {
         huespedes.remove(id);
     }
+    public boolean hasAnfitrion(){
+        return !anfitriones.isEmpty();
+    }
+    public boolean hasHuesped(){
+        return !huespedes.isEmpty();
+    }
 }
+
