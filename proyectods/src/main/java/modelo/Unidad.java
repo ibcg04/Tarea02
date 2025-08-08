@@ -36,4 +36,33 @@ public class Unidad {
         ocupante = null;
         System.out.println("Unidad liberada.");
     }
+    // Agrega después de los métodos existentes
+
+    public Huesped getOcupante() {
+        return ocupante;
+    }
+
+    public void setOcupante(Huesped ocupante) {
+        this.ocupante = ocupante;
+    }
+
+    public boolean estaDisponible() {
+        return estado == EstadoAlojamiento.DISPONIBLE;
+    }
+
+    public void mostrarDetalles() {
+        System.out.println("Detalles de la unidad:");
+        System.out.println("Precio: $" + precio);
+        System.out.println("Estado: " + estado);
+        System.out.println("Ocupante: " + (ocupante != null ? ocupante.getNombre() : "Ninguno"));
+    }
+    public void marcarEnMantenimiento() {
+        estado = EstadoAlojamiento.EN_MANTENIMIENTO;
+        System.out.println("Unidad marcada en mantenimiento.");
+    }
+
+    public void marcarFueraDeServicio() {
+        estado = EstadoAlojamiento.FUERA_DE_SERVICIO;
+        System.out.println("Unidad marcada fuera de servicio.");
+    }
 }

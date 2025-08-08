@@ -93,4 +93,23 @@ public class Huesped extends Usuario {
         return "Huesped " + getNombre() + ", getID()=" + getID()
                 + "]";
     }
+
+    public void cancelarReserva() {
+        if (unidadOcupada != null) {
+            unidadOcupada.liberarUnidad();
+            unidadOcupada = null;
+            System.out.println("Reserva cancelada exitosamente.");
+        } else {
+            System.out.println("No tienes ninguna reserva activa.");
+        }
     }
+
+    public void verReservaActual() {
+        if (unidadOcupada != null) {
+            System.out.println("Tu reserva actual:");
+            unidadOcupada.mostrarDetalles();
+        } else {
+            System.out.println("No tienes ninguna reserva activa.");
+        }
+    }
+}

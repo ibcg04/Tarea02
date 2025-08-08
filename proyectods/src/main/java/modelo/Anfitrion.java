@@ -58,6 +58,29 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
 public String toString() {
     return "Anfitrion: " + getNombre() + " (ID: " + getID() + ")";
 }
+// Agrega dentro de la clase Anfitrion
+
+public void agregarPropiedad(Propiedad propiedad) {
+    propiedades.add(propiedad);
+    System.out.println("Propiedad agregada exitosamente.");
+}
+
+    public void eliminarPropiedad(Propiedad propiedad) {
+        if (propiedades.remove(propiedad)) {
+            System.out.println("Propiedad eliminada exitosamente.");
+        } else {
+            System.out.println("La propiedad no existe en tu lista.");
+        }
+    }
+
+    public void mostrarReseñas() {
+        System.out.println("Reseñas recibidas:");
+        for (Propiedad p : propiedades) {
+            for (Reseña r : p.getReseñas()) {
+                System.out.println(r);
+            }
+        }
+    }
 
    
 

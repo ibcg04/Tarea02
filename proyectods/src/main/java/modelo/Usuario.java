@@ -30,4 +30,20 @@ public class Usuario {
         this.id = id;
         this.reseñas = new ArrayList<>();
     }
+
+    public void agregarReseña(Reseña reseña) {
+        reseña.setAutor(this); // Relaciona la reseña con el usuario actual
+        reseñas.add(reseña);
+    }
+
+    public void mostrarReseñas() {
+        if (reseñas.isEmpty()) {
+            System.out.println("No hay reseñas para este usuario.");
+        } else {
+            System.out.println("Reseñas de " + nombre + ":");
+            for (Reseña r : reseñas) {
+                System.out.println("- " + r.getCalificacion() + ": " + r.getDescripcion());
+            }
+        }
+    }
 }

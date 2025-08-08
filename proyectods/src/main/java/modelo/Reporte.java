@@ -3,6 +3,7 @@ package modelo;
 public class Reporte {
     private Huesped autor;
     private String mensaje;
+    private boolean resuelto;
 
     public Huesped getAutor(){
         return autor;
@@ -18,7 +19,6 @@ public class Reporte {
     }
 
     public void setResuelto(boolean b) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setResuelto'");
+        this.resuelto = b;
     }
 }

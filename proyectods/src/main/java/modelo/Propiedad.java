@@ -15,13 +15,8 @@ public class Propiedad {
         this.reseñas = reseñas;
     }
 
-    public void mostrarUnidades(){
-        for(Unidad u : unidades){
-            System.out.println(u);
-        }
-        
-    }
 
+    
     public String getUbicacion() {
         return ubicacion;
     }
@@ -42,4 +37,34 @@ public class Propiedad {
     public String toString() {
         return "Propiedad{" + "Ubicacion=" + ubicacion + ", Unidades=" + unidades + ", Propietario=" + propietario + ", Reseñas=" + reseñas + '}';
     }   
+    // Agrega dentro de la clase Propiedad
+
+
+
+    public void mostrarUnidades() {
+        System.out.println("Unidades disponibles:");
+        for (Unidad u : unidades) {
+            System.out.println(u);
+        }
+    }
+    public void agregarUnidad(Unidad unidad) {
+    unidades.add(unidad);
+    System.out.println("Unidad agregada a la propiedad.");
+}
+
+    public void agregarReseña(Reseña reseña) {
+        reseñas.add(reseña);
+        System.out.println("Reseña agregada a la propiedad.");
+    }
+
+    public void mostrarReseñas() {
+        if (reseñas.isEmpty()) {
+            System.out.println("No hay reseñas para esta propiedad.");
+        } else {
+            System.out.println("Reseñas de la propiedad:");
+            for (Reseña r : reseñas) {
+                System.out.println("- " + r.getCalificacion() + ": " + r.getDescripcion());
+            }
+        }
+    }
 }

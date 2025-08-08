@@ -2,6 +2,8 @@ package modelo;
 
 import modelo.Anfitrion;
 import modelo.Huesped;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BaseDatos {
@@ -80,18 +82,29 @@ public class BaseDatos {
     public boolean hasHuesped(){
         return !huespedes.isEmpty();
     }
-public void getUbicaciones() {
-    java.util.HashSet<String> ubicaciones = new java.util.HashSet<>();
-    for (Anfitrion anfitrion : anfitriones.values()) {
-        for (Propiedad propiedad : anfitrion.getPropiedades()) {
-            ubicaciones.add(propiedad.getUbicacion());
+    public void getUbicaciones() {
+        java.util.HashSet<String> ubicaciones = new java.util.HashSet<>();
+        for (Anfitrion anfitrion : anfitriones.values()) {
+            for (Propiedad propiedad : anfitrion.getPropiedades()) {
+                ubicaciones.add(propiedad.getUbicacion());
+            }
+        }
+        System.out.println("Ubicaciones registradas:");
+        for (String ubicacion : ubicaciones) {
+            System.out.println("- " + ubicacion);
         }
     }
-    System.out.println("Ubicaciones registradas:");
-    for (String ubicacion : ubicaciones) {
-        System.out.println("- " + ubicacion);
+    public ArrayList<Propiedad> buscarPropiedadesPorUbicacion(String ubicacion) {
+        ArrayList<Propiedad> resultado = new ArrayList<>();
+        for (Anfitrion anfitrion : anfitriones.values()) {
+            for (Propiedad propiedad : anfitrion.getPropiedades()) {
+                if (propiedad.getUbicacion().equalsIgnoreCase(ubicacion)) {
+                    resultado.add(propiedad);
+                }
+            }
+        }
+        return resultado;
     }
-}
 
 }
 
