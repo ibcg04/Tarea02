@@ -58,8 +58,9 @@ public class Propiedad {
 
     public void mostrarUnidades() {
         System.out.println("Unidades disponibles:");
+        int enumeration = 1;
         for (Unidad u : unidades) {
-            System.out.println(u);
+            System.out.println(enumeration+".- "+u);
         }
     }
     public void agregarUnidad(Unidad unidad) {

@@ -1,14 +1,11 @@
 package modelo;
 
+
 import java.util.ArrayList;
 
 public class Huesped extends Usuario {
     private Unidad unidadOcupada;
-/* 
-    public Huesped(String nombre) {
-        super(nombre);
-    }
-*/
+    private ArrayList<Unidad> historialReservas;
 
     public void Reportar(String mensaje){
 
@@ -45,7 +42,7 @@ public class Huesped extends Usuario {
             unidad.setEstadoAlojamiento(EstadoAlojamiento.RESERVADA);
             pagar(unidad.getPrecio());
             System.out.println("Reserva exitosa");
-
+            historialReservas.add(unidad);
             unidadOcupada.getPropiedad().getPropietario().getHistorialOcupantes().add(this);
         } else {
             System.out.println("La unidad no está disponible para reservar.");
@@ -55,6 +52,12 @@ public class Huesped extends Usuario {
     public Reseña reseñar(int calificacion, String descripcion){
         return new Reseña(calificacion, descripcion, this);
     }
+
+    public Reseña reseñar(int calificacion, String descripcion, Usuario autor){
+        return new Reseña(calificacion, descripcion, autor);
+    }
+
+    
 
     public void reportar(String mensaje, Unidad unidadOcupada){
     // Implementación útil: crear y mostrar un reporte
@@ -115,4 +118,18 @@ public class Huesped extends Usuario {
             System.out.println("No tienes ninguna reserva activa.");
         }
     }
+
+    public void mostrarReservas() {
+        if (historialReservas == null || historialReservas.isEmpty()) {
+            System.out.println("No tienes reservas en tu historial.");
+        } else {
+            System.out.println("Historial de reservas:");
+            for (Unidad u : historialReservas) {
+                u.mostrarDetalles();
+            }
+        }
+    }
+
+
+
 }

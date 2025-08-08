@@ -1,6 +1,7 @@
 package ec.edu.espol;
 import java.util.Scanner;
 
+import logica.HuespedManager;
 import modelo.Huesped;
 
 public class MenuHuesped {
@@ -25,15 +26,19 @@ public class MenuHuesped {
             switch (opcion) {
                 case 1:
                     System.out.println("Buscando Propiedades...");
+                    HuespedManager.mostrarPropiedades(sc);
                     break;
                 case 2:
                     System.out.println("Reservando Propiedad...");
+                    HuespedManager.reservarPropiedad(huesped, sc);
                     break;
                 case 3:
-                    System.out.println("Ver Reservas...");
+                    System.out.println("Ver Reserva...");
+                    huesped.mostrarReservas();
                     break;
                 case 4:
                     System.out.println("Haciendo reseña...");
+                    HuespedManager.generarReseña(huesped, sc);
                     break;
                 case 5:
                     System.out.println("Reportando incidente...");
@@ -45,6 +50,9 @@ public class MenuHuesped {
                     System.out.println("Opción no válida. Intente nuevamente.");
                     break;
             }
+        
         }
-   }
+        
 }
+}
+

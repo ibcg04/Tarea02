@@ -3,6 +3,7 @@ package logica;
 import java.util.Scanner;
 
 import modelo.Anfitrion;
+import modelo.Huesped;
 import modelo.Propiedad;
 
 public class AnfitrionManager {
@@ -86,19 +87,30 @@ public class AnfitrionManager {
             System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
             sc.nextLine(); // limpiar entrada inválida
         }
+        Huesped huespedReseñar = anfitrion.getHistorialOcupantes().get(opcionHuesped - 1);
         System.out.println("Haciendo reseña...");
         System.out.print("Ingrese la calificación (1-5): ");
-        int calificacion = sc.nextInt();
-        sc.nextLine(); 
+        int calificacion = -1;
+        while (true) {
+            if (sc.hasNextInt()) {
+                calificacion = sc.nextInt();
+                sc.nextLine();
+
+                if (calificacion >= 1 && calificacion <= 5) {
+                    break; // entrada válida, salir del bucle
+                } else {
+                    System.out.println("Número fuera de rango de calificacion. Intente nuevamente.");
+                }
+            }    
+             else {
+                System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                sc.nextLine(); // limpiar entrada inválida
+            }
+        } 
         System.out.print("Ingrese la descripción de la reseña: ");
         String descripcion = sc.nextLine();
         
-        if (calificacion < 1 || calificacion > 5) {
-            System.out.println("Calificación inválida. Debe ser entre 1 y 5.");
-            return;
-        }
-        
-        anfitrion.reseñar(calificacion, descripcion);
+        anfitrion.reseñar(calificacion, descripcion, huespedReseñar);
         System.out.println("Reseña agregada exitosamente.");
     }
 }

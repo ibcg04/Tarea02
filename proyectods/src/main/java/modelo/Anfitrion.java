@@ -42,6 +42,11 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
         return new Reseña(calificacion, descripcion, this);
     }
 
+    public Reseña reseñar(int calificacion, String descripcion, Usuario autor){
+        return new Reseña(calificacion, descripcion, autor);
+    }
+
+
     @Override
     public void resolverReporte(Reporte r) {
         // Implementación útil: mostrar el reporte y marcarlo como resuelto
