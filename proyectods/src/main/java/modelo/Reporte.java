@@ -16,4 +16,9 @@ public class Reporte {
         this.autor = autor;
         this.mensaje = mensaje;
     }
+
+    public void setResuelto(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setResuelto'");
+    }
 }

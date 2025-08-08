@@ -36,8 +36,29 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
 
     @Override
     public void resolverReporte(Reporte r) {
-        System.out.println("Incidente resuelto");
+        // Implementación útil: mostrar el reporte y marcarlo como resuelto
+        System.out.println("Resolviendo reporte:");
+        System.out.println("Autor: " + r.getAutor().getNombre());
+        System.out.println("Mensaje: " + r.getMensaje());
+        r.setResuelto(true);
+        System.out.println("Incidente resuelto.");
     }
+    public void mostrarPropiedades() {
+    if (propiedades.isEmpty()) {
+        System.out.println("No tienes propiedades registradas.");
+    } else {
+        System.out.println("Tus propiedades:");
+        for (Propiedad p : propiedades) {
+            System.out.println(p);
+        }
+    }
+    
+}
+@Override
+public String toString() {
+    return "Anfitrion: " + getNombre() + " (ID: " + getID() + ")";
+}
+
    
 
 

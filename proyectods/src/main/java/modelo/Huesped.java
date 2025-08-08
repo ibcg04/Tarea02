@@ -53,9 +53,13 @@ public class Huesped extends Usuario {
         return new Reseña(calificacion, descripcion, this);
     }
 
-    public Reporte reportar(Huesped autor, String mensaje){
-        return new Reporte(autor, mensaje);
-    }
+    public void reportar(String mensaje){
+    // Implementación útil: crear y mostrar un reporte
+    Reporte reporte = new Reporte(this, mensaje);
+    System.out.println("Reporte enviado:");
+    System.out.println("Autor: " + getNombre());
+    System.out.println("Mensaje: " + mensaje);
+}
     public void mostrarPropiedades(ArrayList<Propiedad> propiedades){
         System.out.println("Propiedades disponibles:");
         
