@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.ArrayList;
-import modelo.BaseDatos;
 
 public class Huesped extends Usuario {
     private Unidad unidadOcupada;
@@ -24,6 +23,7 @@ public class Huesped extends Usuario {
     public Unidad getUnidadOcupada() {
         return unidadOcupada;
     }   
+    @Override
     public int getID() {
         return super.getID();
     }
@@ -35,6 +35,7 @@ public class Huesped extends Usuario {
 
     public void pagar(double precio) {
         System.out.println("Pago realizado");
+        
     }
 
 
@@ -44,6 +45,8 @@ public class Huesped extends Usuario {
             unidad.setEstadoAlojamiento(EstadoAlojamiento.RESERVADA);
             pagar(unidad.getPrecio());
             System.out.println("Reserva exitosa");
+
+            unidadOcupada.getHistorialOcupantes().add(this);
         } else {
             System.out.println("La unidad no está disponible para reservar.");
         }
@@ -53,7 +56,7 @@ public class Huesped extends Usuario {
         return new Reseña(calificacion, descripcion, this);
     }
 
-    public void reportar(String mensaje){
+    public void reportar(String mensaje, Unidad unidadOcupada){
     // Implementación útil: crear y mostrar un reporte
     Reporte reporte = new Reporte(this, mensaje);
     System.out.println("Reporte enviado:");

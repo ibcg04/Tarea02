@@ -5,6 +5,9 @@ public class Unidad {
     private EstadoAlojamiento estado;
     private Huesped ocupante;
 
+ 
+
+
     public void setEstadoAlojamiento(EstadoAlojamiento estado) {
         this.estado = estado;
     }
@@ -65,4 +68,6 @@ public class Unidad {
         estado = EstadoAlojamiento.FUERA_DE_SERVICIO;
         System.out.println("Unidad marcada fuera de servicio.");
     }
+    
+    
 }

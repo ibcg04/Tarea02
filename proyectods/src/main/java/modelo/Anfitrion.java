@@ -5,8 +5,16 @@ import java.util.Date;
 
 public class Anfitrion extends Usuario implements ResuelveReporte {
     private ArrayList<Propiedad> propiedades;
+        private ArrayList<Huesped> historialOcupantes; 
     
     /* Getters */
+    public ArrayList<Huesped> getHistorialOcupantes() {
+    return historialOcupantes;
+    }
+
+    public void setHistorialOcupantes(ArrayList<Huesped> historialOcupantes) {
+        this.historialOcupantes = historialOcupantes;
+    }
     public ArrayList<Propiedad> getPropiedades() {
         return propiedades;
     }
@@ -48,8 +56,10 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
         System.out.println("No tienes propiedades registradas.");
     } else {
         System.out.println("Tus propiedades:");
+        int enumeration = 1;
         for (Propiedad p : propiedades) {
-            System.out.println(p);
+            System.out.println(enumeration + ".-" + p);
+            enumeration++;
         }
     }
     
@@ -84,5 +94,15 @@ public void agregarPropiedad(Propiedad propiedad) {
 
    
 
-
+    public void mostrarHistorialOcupantes() {
+        System.out.println("Historial de ocupantes:");
+        if (historialOcupantes.isEmpty()) {
+            System.out.println("No hay ocupantes registrados.");
+        } else {
+            int enumeration = 1;
+            for (Huesped h : historialOcupantes) {
+                System.out.println(enumeration+".-"+h.getNombre());
+            }
+        }
+    }
 }

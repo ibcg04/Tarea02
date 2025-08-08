@@ -3,10 +3,25 @@ package modelo;
 import java.util.ArrayList;
 
 public class Propiedad {
-    private String ubicacion;
+    private final String ubicacion;
     private ArrayList<Unidad> unidades;
     private Anfitrion propietario;
     private ArrayList<Reseña> reseñas;
+
+    public void setUnidades(ArrayList<Unidad> unidades) {
+        this.unidades = unidades;
+    }
+    public void setPropietario(Anfitrion propietario) {
+        this.propietario = propietario;
+    }
+
+
+
+    public void setReseñas(ArrayList<Reseña> reseñas) {
+        this.reseñas = reseñas;
+    }
+
+
 
     public Propiedad(String ubicacion, ArrayList<Unidad> unidades, Anfitrion propietario, ArrayList<Reseña> reseñas) {
         this.ubicacion = ubicacion;

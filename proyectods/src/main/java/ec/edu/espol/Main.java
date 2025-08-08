@@ -22,7 +22,7 @@ public class Main {
             switch (opcion) {
                 case 1:
                     System.out.println("Iniciando sesión como Huesped...");
-                    InicioSesion.iniciarSesionHuesped(sc);
+                    InicioSesion.iniciarSesionHuesped(sc);            
                     break;
                 case 2:
                     System.out.println("Iniciando sesión como Anfitrión...");

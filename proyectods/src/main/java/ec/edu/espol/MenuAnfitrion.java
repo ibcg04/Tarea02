@@ -1,10 +1,12 @@
 package ec.edu.espol;
-import modelo.Anfitrion;
 import java.util.Scanner;
 
+import logica.AnfitrionManager;
+import modelo.Anfitrion;
+
 public class MenuAnfitrion {
-    public static void mostrarMenu(Anfitrion Anfitrion, Scanner sc) {
-        if (Anfitrion == null) {
+    public static void mostrarMenu(Anfitrion anfitrion, Scanner sc) {
+        if (anfitrion == null) {
             System.out.println("No se ha iniciado sesión como Anfitrion.");
             Main.gestionarAplicacion();
         }
@@ -23,15 +25,18 @@ public class MenuAnfitrion {
             switch (opcion) {
                 case 1:
                     System.out.println("Ver propiedades...");
+                    anfitrion.mostrarPropiedades();
                     break;
                 case 2:
                     System.out.println("Manejar propiedades...");
+                    AnfitrionManager.manejarPropiedades(anfitrion, sc);
                     break;
                 case 3:
                     System.out.println("Manejando incidentes...");
                     break;
                 case 4:
                     System.out.println("Haciendo reseña...");
+                    
                     break;
                 case 5:
                     System.out.println("Saliendo...");
