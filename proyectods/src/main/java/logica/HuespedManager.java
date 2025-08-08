@@ -21,6 +21,7 @@ public class HuespedManager {
         switch (opcion) {
             case 1:
                 System.out.println("Buscando por ubicación...");
+                
                 break;
             case 2:
                 System.out.println("Buscando por precio...");
@@ -33,7 +34,7 @@ public class HuespedManager {
                 break;
             case 5:
                 System.out.println("Volviendo al menú principal...");
-                MenuHuesped.mostrarMenu(huesped, sc);
+                MenuHuesped.mostrarMenu(huesped,sc);
                 break;
             default:
                 break;

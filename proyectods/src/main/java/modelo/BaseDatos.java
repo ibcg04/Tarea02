@@ -74,13 +74,24 @@ public class BaseDatos {
     public void eliminarHuesped(int id) {
         huespedes.remove(id);
     }
-
-    /* Verificar si hay anfitriones o huéspedes registrados */
-    public boolean hasAnfitriones(){
+    public boolean hasAnfitrion(){
         return !anfitriones.isEmpty();
     }
-    public boolean hasHuespedes(){
+    public boolean hasHuesped(){
         return !huespedes.isEmpty();
     }
+public void getUbicaciones() {
+    java.util.HashSet<String> ubicaciones = new java.util.HashSet<>();
+    for (Anfitrion anfitrion : anfitriones.values()) {
+        for (Propiedad propiedad : anfitrion.getPropiedades()) {
+            ubicaciones.add(propiedad.getUbicacion());
+        }
+    }
+    System.out.println("Ubicaciones registradas:");
+    for (String ubicacion : ubicaciones) {
+        System.out.println("- " + ubicacion);
+    }
+}
+
 }
 
