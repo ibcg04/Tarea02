@@ -4,10 +4,15 @@ public class Unidad {
     private double precio;
     private EstadoAlojamiento estado;
     private Huesped ocupante;
-
+    private Propiedad propiedad;
  
-
-
+    //GETTERS Y SETTERS
+    public Propiedad getPropiedad() {
+        return propiedad;
+    }
+    public void setPropiedad(Propiedad propiedad) {
+        this.propiedad = propiedad;
+    }
     public void setEstadoAlojamiento(EstadoAlojamiento estado) {
         this.estado = estado;
     }
@@ -19,7 +24,7 @@ public class Unidad {
     public EstadoAlojamiento getEstadoAlojamiento() {
         return estado;
     }
-
+    //
     @Override
     public String toString() {
         return "Unidad{" + "precio=" + precio + ", estado=" + estado + ", ocupante=" + ocupante + '}';

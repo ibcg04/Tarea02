@@ -46,7 +46,7 @@ public class Huesped extends Usuario {
             pagar(unidad.getPrecio());
             System.out.println("Reserva exitosa");
 
-            unidadOcupada.getHistorialOcupantes().add(this);
+            unidadOcupada.getPropiedad().getPropietario().getHistorialOcupantes().add(this);
         } else {
             System.out.println("La unidad no está disponible para reservar.");
         }

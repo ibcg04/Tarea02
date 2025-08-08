@@ -67,16 +67,16 @@ public class AnfitrionManager {
         // Por ejemplo, mostrar reportes, resolverlos, etc.
     }
 
-    public static void generarReseña(Anfitrion anfitrion, Scanner sc, Propiedad propiedad) {
+    public static void generarReseña(Anfitrion anfitrion, Scanner sc) {
         int opcionHuesped = -1;
         while (true) {
-        System.out.print("Ingrese el ID del huesped. (1 a " + propiedad.getUnidades() + "): ");
-        
+        anfitrion.mostrarHistorialOcupantes();
+        System.out.print("Seleccione un Huesped para Reseñar: (1 a " + anfitrion.getHistorialOcupantes().size() + "): ");
         if (sc.hasNextInt()) {
             opcionHuesped = sc.nextInt();
-            sc.nextLine(); // limpiar buffer
+            sc.nextLine();
             
-            if (opcionHuesped >= 1 && opcionHuesped <= anfitrion.getPropiedades().size()) {
+            if (opcionHuesped >= 1 && opcionHuesped <= anfitrion.getHistorialOcupantes().size()) {
                 break; // entrada válida, salir del bucle
             } else {
                 System.out.println("Número fuera de rango. Intente nuevamente.");
@@ -101,4 +101,5 @@ public class AnfitrionManager {
         anfitrion.reseñar(calificacion, descripcion);
         System.out.println("Reseña agregada exitosamente.");
     }
+}
 }
