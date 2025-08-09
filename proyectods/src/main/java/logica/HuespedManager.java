@@ -137,4 +137,13 @@ public class HuespedManager {
             System.out.println("No tienes una unidad ocupada para generar una reseña.");
         }
     }
+
+    public static void reportarIncidente(Huesped huesped, Scanner sc) {
+        System.out.print("Describe el incidente: ");
+        sc.nextLine(); 
+        String mensaje = sc.nextLine();
+        // Dispara la lógica de reportes del huésped
+        huesped.reportar(mensaje);
+    }
+  
 }

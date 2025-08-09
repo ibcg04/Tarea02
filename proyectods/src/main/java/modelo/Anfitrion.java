@@ -5,7 +5,8 @@ import java.util.Date;
 
 public class Anfitrion extends Usuario implements ResuelveReporte {
     private ArrayList<Propiedad> propiedades;
-        private ArrayList<Huesped> historialOcupantes; 
+    private ArrayList<Huesped> historialOcupantes; 
+    private ResuelveReporte nextHandler; //Chain of Responsibility
     
     /* Getters */
     public ArrayList<Huesped> getHistorialOcupantes() {
@@ -26,6 +27,11 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
         super(nombre, id);
         this.propiedades = new ArrayList<>();
     }
+    // setter explicito para encadenar
+    public void setNextHandler(ResuelveReporte nextHandler) {
+        this.nextHandler = nextHandler;
+    }
+    
 
     public Regla establecerregla(String descripcion){
         return new Regla(descripcion);
@@ -49,26 +55,35 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
 
     @Override
     public void resolverReporte(Reporte r) {
-        // Implementación útil: mostrar el reporte y marcarlo como resuelto
-        System.out.println("Resolviendo reporte:");
-        System.out.println("Autor: " + r.getAutor().getNombre());
-        System.out.println("Mensaje: " + r.getMensaje());
-        r.setResuelto(true);
-        System.out.println("Incidente resuelto.");
-    }
-    public void mostrarPropiedades() {
-    if (propiedades.isEmpty()) {
-        System.out.println("No tienes propiedades registradas.");
-    } else {
-        System.out.println("Tus propiedades:");
-        int enumeration = 1;
-        for (Propiedad p : propiedades) {
-            System.out.println(enumeration + ".-" + p);
-            enumeration++;
+        boolean puedoAtender= (historialOcupantes != null && r.getAutor() != null &&
+                               historialOcupantes.contains(r.getAutor()));
+        
+        if(puedoAtender){
+            System.out.println("Anfitrión atiende el reporte: " + r.getMensaje());
+            r.setResuelto(true); 
+            return;            
+        }
+        // Si no puede atender, delega al siguiente si existe.
+        if (nextHandler != null) {
+            System.out.println("Anfitrión delega el reporte...");
+            nextHandler.resolverReporte(r);
+        } else {
+            System.out.println("Anfitrión no pudo resolver y no hay a quién delegar.");
         }
     }
+    public void mostrarPropiedades() {
+        if (propiedades.isEmpty()) {
+            System.out.println("No tienes propiedades registradas.");
+        } else {
+            System.out.println("Tus propiedades:");
+            int enumeration = 1;
+            for (Propiedad p : propiedades) {
+                System.out.println(enumeration + ".-" + p);
+                enumeration++;
+            }
+        }
     
-}
+    }
 @Override
 public String toString() {
     return "Anfitrion: " + getNombre() + " (ID: " + getID() + ")";
@@ -97,7 +112,6 @@ public void agregarPropiedad(Propiedad propiedad) {
         }
     }
 
-   
 
     public void mostrarHistorialOcupantes() {
         System.out.println("Historial de ocupantes:");

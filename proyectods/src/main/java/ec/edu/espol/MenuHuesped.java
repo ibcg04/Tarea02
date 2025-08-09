@@ -42,6 +42,7 @@ public class MenuHuesped {
                     break;
                 case 5:
                     System.out.println("Reportando incidente...");
+                    HuespedManager.reportarIncidente(huesped, sc);
                     break;
                 case 6:
                     System.out.println("Saliendo...");
