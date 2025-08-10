@@ -7,5 +7,9 @@ public class Regla {
 
         this.descripcion = descripcion;
     }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    
     
 }

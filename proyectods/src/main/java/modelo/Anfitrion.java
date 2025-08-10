@@ -1,11 +1,14 @@
 package modelo;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Anfitrion extends Usuario implements ResuelveReporte {
     private ArrayList<Propiedad> propiedades;
-    private ArrayList<Huesped> historialOcupantes; 
+    private ArrayList<Huesped> historialOcupantes;
+    private ArrayDeque<Reporte> reportes;
+    private ResuelveReporte nextHandler; //Chain of Responsibility
     
     /* Getters Y Setters */
     public ArrayList<Huesped> getHistorialOcupantes() {
@@ -25,6 +28,10 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
         super(nombre, id);
         this.propiedades = new ArrayList<>();
     }
+    public void setNextHandler(ResuelveReporte nextHandler) {
+        this.nextHandler = nextHandler;
+    }
+    
 
     public Regla establecerregla(String descripcion){
         return new Regla(descripcion);
@@ -48,25 +55,51 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
 
     @Override
     public void resolverReporte(Reporte r) {
-        // Implementación útil: mostrar el reporte y marcarlo como resuelto
-        System.out.println("Resolviendo reporte:");
-        System.out.println("Autor: " + r.getAutor().getNombre());
-        System.out.println("Mensaje: " + r.getMensaje());
-        r.setResuelto(true);
-        System.out.println("Incidente resuelto.");
-    }
-    public void mostrarPropiedades() {
-    if (propiedades.isEmpty()) {
-        System.out.println("No tienes propiedades registradas.");
-    } else {
-        System.out.println("Tus propiedades:");
-        int enumeration = 1;
-        for (Propiedad p : propiedades) {
-            System.out.println(enumeration + ".-" + p);
-            enumeration++;
+        String msg;
+            if (r.getMensaje() == null) {
+                msg = "";
+            } else {
+                msg = r.getMensaje().toLowerCase();
+            }
+            
+      boolean puedoResolver = msg.contains("limpieza") || msg.contains("ruido")
+                         || msg.contains("wifi")     || msg.contains("toalla");
+
+        
+        if (puedoResolver) {
+            System.out.println("Anfitrión resuelve el incidente.");
+            r.setResuelto(true);
+            return;
+        }
+        // Si no puede atender, delega al siguiente si existe.
+        if (nextHandler != null) {
+            System.out.println("Anfitrión delega el reporte...");
+            nextHandler.resolverReporte(r);
+        } else {
+            System.out.println("Anfitrión no pudo resolver y no hay a quién delegar.");
         }
     }
+    public void mostrarPropiedades() {
+        if (propiedades.isEmpty()) {
+            System.out.println("No tienes propiedades registradas.");
+        } else {
+            System.out.println("Tus propiedades:");
+            int enumeration = 1;
+            for (Propiedad p : propiedades) {
+                System.out.println(enumeration + ".-" + p);
+                enumeration++;
+            }
+        }
     
+    }
+    public ArrayDeque<Reporte> getReportes() {
+        if (this.reportes == null) {
+            this.reportes = new ArrayDeque<>();
+        }
+        return this.reportes;
+    }
+    public void setReportes(ArrayDeque<Reporte> reportes) {
+    this.reportes = reportes;
 }
 @Override
 public String toString() {
@@ -96,7 +129,6 @@ public void agregarPropiedad(Propiedad propiedad) {
         }
     }
 
-   
 
     public void mostrarHistorialOcupantes() {
         System.out.println("Historial de ocupantes:");

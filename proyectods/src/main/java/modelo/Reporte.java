@@ -21,4 +21,8 @@ public class Reporte {
     public void setResuelto(boolean b) {
         this.resuelto = b;
     }
+
+    public boolean isResuelto() { 
+        return resuelto;
+     }
 }

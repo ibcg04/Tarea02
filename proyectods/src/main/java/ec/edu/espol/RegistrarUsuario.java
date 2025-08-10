@@ -1,8 +1,9 @@
 package ec.edu.espol;
 import java.util.Scanner;
+
+import modelo.Anfitrion;
 import modelo.BaseDatos;
 import modelo.Huesped;
-import modelo.Anfitrion;
 
 public class RegistrarUsuario {
 
@@ -37,7 +38,6 @@ public class RegistrarUsuario {
 
     public static void registrarHuesped(Scanner sc) {
         System.out.println("Ingrese el nombre del Huesped:");
-        sc.nextLine();
         String nombre = sc.nextLine();
         System.out.println("Ingrese el ID del Huesped:");
         int id = sc.nextInt();

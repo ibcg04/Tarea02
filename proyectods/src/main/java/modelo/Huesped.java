@@ -6,13 +6,7 @@ import java.util.ArrayList;
 public class Huesped extends Usuario {
     private Unidad unidadOcupada;
     private ArrayList<Unidad> historialReservas;
-
-    public void Reportar(String mensaje){
-
-        System.out.println("Reporte enviado");
-        
-    }   
-
+ 
     /* Getters y Setters */
     public void setUnidadOcupada(Unidad unidadOcupada) {
         this.unidadOcupada = unidadOcupada;
@@ -57,15 +51,22 @@ public class Huesped extends Usuario {
         return new Reseña(calificacion, descripcion, autor);
     }
 
-    
+    public void reportar(String mensaje){
+        if (unidadOcupada == null || unidadOcupada.getPropiedad() == null
+                || unidadOcupada.getPropiedad().getPropietario() == null) {
+            System.out.println("No hay una unidad/propiedad/anfitrión asociado para reportar.");
+            return; 
+        }
+        Reporte reporte = new Reporte(this, mensaje);
 
-    public void reportar(String mensaje, Unidad unidadOcupada){
-    // Implementación útil: crear y mostrar un reporte
-    Reporte reporte = new Reporte(this, mensaje);
-    System.out.println("Reporte enviado:");
-    System.out.println("Autor: " + getNombre());
-    System.out.println("Mensaje: " + mensaje);
-}
+        //Construir la cadena
+        Anfitrion anfitrion = unidadOcupada.getPropiedad().getPropietario();
+
+        // disparar la cadena desde el anfitrión
+        System.out.println("Reportando incidente...");
+        anfitrion.resolverReporte(reporte);
+        System.out.println("Reporte enviado a la cola de incidentes del anfitrión.");
+    }
     public void mostrarPropiedades(ArrayList<Propiedad> propiedades){
         System.out.println("Propiedades disponibles:");
         
@@ -129,6 +130,7 @@ public class Huesped extends Usuario {
             }
         }
     }
+
 
 
 
