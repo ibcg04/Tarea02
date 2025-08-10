@@ -15,7 +15,12 @@ public class Reporte {
 
     public Reporte(Huesped autor, String mensaje) {
         this.autor = autor;
-        this.mensaje = mensaje;
+        if (mensaje == null) {
+            System.out.println("[ADVERTENCIA] mensaje no puede ser null, se asigna vacío.");
+            this.mensaje = "";
+        } else {
+            this.mensaje = mensaje;
+        }
     }
 
     public void setResuelto(boolean b) {

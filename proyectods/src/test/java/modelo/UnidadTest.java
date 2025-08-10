@@ -1,6 +1,7 @@
 package modelo;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +14,7 @@ class UnidadTest {
     }
 
     @Test
+    @DisplayName("Libera la unidad correctamente")
     void testLiberarUnidad() {
         Huesped h = new Huesped("Carlos", 1);
         unidad.setOcupante(h);
@@ -21,14 +23,30 @@ class UnidadTest {
     }
 
     @Test
+    @DisplayName("Marca la unidad en mantenimiento")
     void testMarcarEnMantenimiento() {
         unidad.marcarEnMantenimiento();
         assertEquals(EstadoAlojamiento.EN_MANTENIMIENTO, unidad.getEstadoAlojamiento());
     }
 
     @Test
+    @DisplayName("Marca la unidad fuera de servicio")
     void testMarcarFueraDeServicio() {
         unidad.marcarFueraDeServicio();
         assertEquals(EstadoAlojamiento.FUERA_DE_SERVICIO, unidad.getEstadoAlojamiento());
+    }
+
+    @Test
+    @DisplayName("Permite setear ocupante nulo")
+    void testSetOcupanteNulo() {
+        unidad.setOcupante(null);
+        assertNull(unidad.getOcupante());
+    }
+
+    @Test
+    @DisplayName("Permite setear propiedad nula")
+    void testSetPropiedadNula() {
+        unidad.setPropiedad(null);
+        assertNull(unidad.getPropiedad());
     }
 }

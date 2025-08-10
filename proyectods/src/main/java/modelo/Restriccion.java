@@ -12,7 +12,7 @@ public class Restriccion extends Regla{
 
     @Override
     public String toString() {
-        return super.descripcion + ": " + restriccion;
+    return "Restricción: " + restriccion;
     }
 
     

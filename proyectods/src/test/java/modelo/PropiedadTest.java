@@ -1,12 +1,14 @@
 package modelo;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
 class PropiedadTest {
     @Test
+    @DisplayName("Agrega una unidad a la propiedad")
     void testAgregarUnidad() {
         Propiedad p = new Propiedad("Quito", new ArrayList<>(), null, new ArrayList<>());
         Unidad u = new Unidad();
@@ -15,10 +17,25 @@ class PropiedadTest {
     }
 
     @Test
+    @DisplayName("Agrega una reseña a la propiedad")
     void testAgregarReseña() {
         Propiedad p = new Propiedad("Quito", new ArrayList<>(), null, new ArrayList<>());
         Reseña r = new Reseña(5, "Muy buena", null);
         p.agregarReseña(r);
         assertTrue(p.getReseñas().contains(r));
+    }
+
+    @Test
+    @DisplayName("No lanza excepción al agregar unidad nula")
+    void testAgregarUnidadNula() {
+        Propiedad p = new Propiedad("Quito", new ArrayList<>(), null, new ArrayList<>());
+        assertDoesNotThrow(() -> p.agregarUnidad(null));
+    }
+
+    @Test
+    @DisplayName("No lanza excepción al agregar reseña nula")
+    void testAgregarReseñaNula() {
+        Propiedad p = new Propiedad("Quito", new ArrayList<>(), null, new ArrayList<>());
+        assertDoesNotThrow(() -> p.agregarReseña(null));
     }
 }

@@ -14,14 +14,9 @@ public class Propiedad {
     public void setPropietario(Anfitrion propietario) {
         this.propietario = propietario;
     }
-
-
-
     public void setReseñas(ArrayList<Reseña> reseñas) {
         this.reseñas = reseñas;
     }
-
-
 
     public Propiedad(String ubicacion, ArrayList<Unidad> unidades, Anfitrion propietario, ArrayList<Reseña> reseñas) {
         this.ubicacion = ubicacion;
@@ -29,8 +24,6 @@ public class Propiedad {
         this.propietario = propietario;
         this.reseñas = reseñas;
     }
-
-
     
     public String getUbicacion() {
         return ubicacion;
@@ -50,7 +43,7 @@ public class Propiedad {
 
     @Override
     public String toString() {
-        return "Propiedad{" + "Ubicacion=" + ubicacion + ", Unidades=" + unidades + ", Propietario=" + propietario + ", Reseñas=" + reseñas + '}';
+    return "Propiedad en " + ubicacion + ", propietario: " + (propietario != null ? propietario.getNombre() : "Sin asignar") + ", unidades: " + (unidades != null ? unidades.size() : 0) + ", reseñas: " + (reseñas != null ? reseñas.size() : 0);
     }   
     // Agrega dentro de la clase Propiedad
 
@@ -63,12 +56,21 @@ public class Propiedad {
             System.out.println(enumeration+".- "+u);
         }
     }
+
     public void agregarUnidad(Unidad unidad) {
-    unidades.add(unidad);
-    System.out.println("Unidad agregada a la propiedad.");
-}
+        if (unidad == null) {
+            System.out.println("[ADVERTENCIA] Unidad nula. No se agrega a la propiedad.");
+            return;
+        }
+        unidades.add(unidad);
+        System.out.println("Unidad agregada a la propiedad.");
+    }
 
     public void agregarReseña(Reseña reseña) {
+        if (reseña == null) {
+            System.out.println("[ADVERTENCIA] Reseña nula. No se agrega a la propiedad.");
+            return;
+        }
         reseñas.add(reseña);
         System.out.println("Reseña agregada a la propiedad.");
     }

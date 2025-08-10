@@ -27,7 +27,7 @@ public class Unidad {
     //
     @Override
     public String toString() {
-        return "Unidad{" + "precio=" + precio + ", estado=" + estado + ", ocupante=" + ocupante + '}';
+    return "Unidad: precio $" + precio + ", estado: " + estado + ", ocupante: " + (ocupante != null ? ocupante.getNombre() : "Ninguno");
     }   
     
     public void liberarUnidad() {

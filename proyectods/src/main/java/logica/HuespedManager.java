@@ -55,7 +55,6 @@ public class HuespedManager {
                 System.out.println("Buscando por tipo de propiedad...");
                 System.out.println("Ingrese el tipo de propiedad que desea buscar:"); //CASA, DEPARTAMENTO, HABITACION
                 String tipoPropiedad = sc.nextLine().trim().toUpperCase();
-                
                 break;
             case 4:
                 System.out.println("Buscando por servicios...");
@@ -84,7 +83,11 @@ public class HuespedManager {
 }
 
     public static void reservarPropiedad(Huesped huesped, Scanner sc) {
-    System.out.println("Reservando Propiedad...");
+        System.out.println("Reservando Propiedad...");
+        if (HuespedManager.mostrarPropiedades(sc).isEmpty()) {
+            System.out.println("No hay propiedades disponibles para reservar.");
+            return;
+        }
         System.out.println("Propiedades disponibles:");
         int opcionReserva = -1;
 
@@ -187,6 +190,7 @@ public class HuespedManager {
 
     public ArrayList<Unidad> ubicacionSearch(String ubicacion) {
         ArrayList<Unidad> unidades = new ArrayList<>();
+    if (ubicacion == null) throw new NullPointerException("ubicacion no puede ser null");
         for (Anfitrion anfitrion : BaseDatos.getDataBase().getAnfitriones().values()) {
             for (Propiedad propiedad : anfitrion.getPropiedades()) {
                 for (Unidad unidad : propiedad.getUnidades()) {
@@ -201,6 +205,7 @@ public class HuespedManager {
 
     public void buscarPorUbicacion(String ubicacion, Scanner sc, Huesped huesped){
         ArrayList<Unidad> unidades2 = ubicacionSearch(ubicacion);
+    if (ubicacion == null) throw new NullPointerException("ubicacion no puede ser null");
         int enumeration = 1;
         if (unidades2.isEmpty()){
             System.out.println("No se encontraron unidades disponibles en esa ubicación.");

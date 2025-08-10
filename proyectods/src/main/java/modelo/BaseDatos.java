@@ -1,7 +1,5 @@
 package modelo;
 
-import modelo.Anfitrion;
-import modelo.Huesped;
 
 import java.util.ArrayList;
 import java.util.HashMap;

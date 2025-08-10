@@ -12,7 +12,8 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
     
     /* Getters Y Setters */
     public ArrayList<Huesped> getHistorialOcupantes() {
-    return historialOcupantes;
+        if (historialOcupantes == null) historialOcupantes = new ArrayList<>();
+        return historialOcupantes;
     }
     public void setHistorialOcupantes(ArrayList<Huesped> historialOcupantes) {
         this.historialOcupantes = historialOcupantes;
@@ -33,22 +34,42 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
     }
     
 
+
     public Regla establecerregla(String descripcion){
+        if (descripcion == null) {
+            System.out.println("[ADVERTENCIA] Descripción de regla nula. Se retorna regla vacía.");
+            return new Regla("");
+        }
         return new Regla(descripcion);
     }
     public Regla establecerHorarioCheck(Date checkIn, Date checkOut){
-        return new CheckInCheckOut(checkIn,checkOut);
+        if (checkIn == null || checkOut == null) {
+            System.out.println("[ADVERTENCIA] Fechas nulas en horario check. Se retorna regla vacía.");
+            return new Regla("");
+        }
+        return new Regla(checkIn.toString() + " - " + checkOut.toString());
     }
     public Regla establecerRestriccion(String restriccion){
-        return new Restriccion(restriccion);
+        if (restriccion == null) {
+            System.out.println("[ADVERTENCIA] Restricción nula. Se retorna regla vacía.");
+            return new Regla("");
+        }
+        return new Regla(restriccion);
     }
 
-
     public Reseña reseñar(int calificacion, String descripcion){
+        if (descripcion == null) {
+            System.out.println("[ADVERTENCIA] Descripción de reseña nula. Se retorna reseña vacía.");
+            return new Reseña(calificacion, "", this);
+        }
         return new Reseña(calificacion, descripcion, this);
     }
 
     public Reseña reseñar(int calificacion, String descripcion, Usuario autor){
+        if (descripcion == null) {
+            System.out.println("[ADVERTENCIA] Descripción de reseña nula. Se retorna reseña vacía.");
+            return new Reseña(calificacion, "", autor);
+        }
         return new Reseña(calificacion, descripcion, autor);
     }
 
@@ -132,7 +153,7 @@ public void agregarPropiedad(Propiedad propiedad) {
 
     public void mostrarHistorialOcupantes() {
         System.out.println("Historial de ocupantes:");
-        if (historialOcupantes.isEmpty()) {
+        if (historialOcupantes == null || historialOcupantes.isEmpty()) {
             System.out.println("No hay ocupantes registrados.");
         } else {
             int enumeration = 1;

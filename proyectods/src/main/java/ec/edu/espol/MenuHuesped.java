@@ -16,8 +16,8 @@ public class MenuHuesped {
             System.out.println("1. Buscar Propiedades");
             System.out.println("2. Reservar Propiedad");
             System.out.println("3. Ver Reservas");
-            System.out.println("4. Reportar incidente");
-            System.out.println("5. Hacer reseña");
+            System.out.println("4. Hacer reseña");
+            System.out.println("5. Reportar incidente");
             System.out.println("6. Salir");
 
             int opcion = sc.nextInt();
