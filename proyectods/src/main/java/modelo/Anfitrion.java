@@ -10,11 +10,10 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
     private ArrayDeque<Reporte> reportes;
     private ResuelveReporte nextHandler; //Chain of Responsibility
     
-    /* Getters */
+    /* Getters Y Setters */
     public ArrayList<Huesped> getHistorialOcupantes() {
     return historialOcupantes;
     }
-
     public void setHistorialOcupantes(ArrayList<Huesped> historialOcupantes) {
         this.historialOcupantes = historialOcupantes;
     }
