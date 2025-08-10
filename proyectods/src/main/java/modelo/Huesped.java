@@ -61,23 +61,11 @@ public class Huesped extends Usuario {
 
         //Construir la cadena
         Anfitrion anfitrion = unidadOcupada.getPropiedad().getPropietario();
-        Moderador moderador = new Moderador();
-        SoporteLegal legal = new SoporteLegal();
-
-        // encadenar
-        anfitrion.setNextHandler(moderador);
-        moderador.setNextHandler(legal);
 
         // disparar la cadena desde el anfitrión
         System.out.println("Reportando incidente...");
         anfitrion.resolverReporte(reporte);
-
-        // confirmar resultado al usuario
-        if (reporte.isResuelto()) {
-            System.out.println("Incidente resuelto.");
-        } else {
-            System.out.println("Incidente no pudo ser resuelto.");
-        }
+        System.out.println("Reporte enviado a la cola de incidentes del anfitrión.");
     }
     public void mostrarPropiedades(ArrayList<Propiedad> propiedades){
         System.out.println("Propiedades disponibles:");

@@ -1,11 +1,13 @@
 package modelo;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Anfitrion extends Usuario implements ResuelveReporte {
     private ArrayList<Propiedad> propiedades;
-    private ArrayList<Huesped> historialOcupantes; 
+    private ArrayList<Huesped> historialOcupantes;
+    private ArrayDeque<Reporte> reportes;
     private ResuelveReporte nextHandler; //Chain of Responsibility
     
     /* Getters */
@@ -27,7 +29,6 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
         super(nombre, id);
         this.propiedades = new ArrayList<>();
     }
-    // setter explicito para encadenar
     public void setNextHandler(ResuelveReporte nextHandler) {
         this.nextHandler = nextHandler;
     }
@@ -55,13 +56,21 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
 
     @Override
     public void resolverReporte(Reporte r) {
-        boolean puedoAtender= (historialOcupantes != null && r.getAutor() != null &&
-                               historialOcupantes.contains(r.getAutor()));
+        String msg;
+            if (r.getMensaje() == null) {
+                msg = "";
+            } else {
+                msg = r.getMensaje().toLowerCase();
+            }
+            
+      boolean puedoResolver = msg.contains("limpieza") || msg.contains("ruido")
+                         || msg.contains("wifi")     || msg.contains("toalla");
+
         
-        if(puedoAtender){
-            System.out.println("Anfitrión atiende el reporte: " + r.getMensaje());
-            r.setResuelto(true); 
-            return;            
+        if (puedoResolver) {
+            System.out.println("Anfitrión resuelve el incidente.");
+            r.setResuelto(true);
+            return;
         }
         // Si no puede atender, delega al siguiente si existe.
         if (nextHandler != null) {
@@ -84,6 +93,15 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
         }
     
     }
+    public ArrayDeque<Reporte> getReportes() {
+        if (this.reportes == null) {
+            this.reportes = new ArrayDeque<>();
+        }
+        return this.reportes;
+    }
+    public void setReportes(ArrayDeque<Reporte> reportes) {
+    this.reportes = reportes;
+}
 @Override
 public String toString() {
     return "Anfitrion: " + getNombre() + " (ID: " + getID() + ")";
