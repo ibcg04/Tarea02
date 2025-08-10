@@ -11,7 +11,6 @@ import modelo.Propiedad;
 import modelo.Unidad;
 
 public class HuespedManager {
-    public void buscarPropiedades(Huesped huesped) {
         System.out.println("==========Buscar Propiedades==========");
         System.out.println("1. Buscar por ubicación");
         System.out.println("2. Buscar por precio");
@@ -45,6 +44,7 @@ public class HuespedManager {
         }
 
     }
+    
     public static ArrayList<Propiedad> mostrarPropiedades(Scanner sc){
         int enumeration = 1;
         ArrayList<Propiedad> propiedades = new ArrayList<>();

@@ -6,12 +6,13 @@ import java.util.Date;
 public class Anfitrion extends Usuario implements ResuelveReporte {
     private ArrayList<Propiedad> propiedades;
         private ArrayList<Huesped> historialOcupantes; 
+    private ArrayList<Huesped> historialOcupantes; 
     
     /* Getters */
+    /* Getters Y Setters */
     public ArrayList<Huesped> getHistorialOcupantes() {
     return historialOcupantes;
     }
-
     public void setHistorialOcupantes(ArrayList<Huesped> historialOcupantes) {
         this.historialOcupantes = historialOcupantes;
     }
