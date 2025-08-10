@@ -9,12 +9,13 @@ public class Moderador implements ResuelveReporte{
     } 
     @Override
     public void resolverReporte(Reporte r) {
-        if (nextHandler != null) {
-            System.out.println("Moderador revisa y delega a Soporte Legal...");
-            nextHandler.resolverReporte(r);
-        } else {
+        System.out.println("Moderador revisa el incidente...");
+        if (!r.isResuelto() && this.nextHandler != null) {
+            System.out.println("Moderador delega a Soporte Legal...");
+            this.nextHandler.resolverReporte(r);
+        } else if (!r.isResuelto()) {
             System.out.println("Moderador resuelve el incidente.");
             r.setResuelto(true);
         }
-    } 
+}
 }

@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 import modelo.Anfitrion;
 import modelo.Huesped;
+import modelo.Moderador;
 import modelo.Propiedad;
+import modelo.Reporte;
+import modelo.SoporteLegal;
 
 public class AnfitrionManager {
     
@@ -63,10 +66,27 @@ public class AnfitrionManager {
         
 }
     public static void manejarIncidentes(Anfitrion anfitrion, Scanner sc) {
-        System.out.println("Manejando incidentes...");
-        // Aquí se puede implementar la lógica para manejar incidentes
-        // Por ejemplo, mostrar reportes, resolverlos, etc.
+        if (anfitrion.getReportes().isEmpty()) {
+            System.out.println("No hay reportes pendientes.");
+            return;
+        }
+        while (!anfitrion.getReportes().isEmpty()){
+            Reporte reporte= anfitrion.getReportes().poll();
+            System.out.println("\nProcesando reporte: " + reporte.getMensaje());
+
+            Moderador moderador = new Moderador();
+            SoporteLegal legal = new SoporteLegal();
+            anfitrion.setNextHandler(moderador);
+            moderador.setNextHandler(legal);
+
+            anfitrion.resolverReporte(reporte);
+            if (reporte.isResuelto()) {
+            System.out.println("Reporte resuelto ");
+        } else {
+            System.out.println("Reporte no pudo ser resuelto ");
+        }
     }
+        }
 
     public static void generarReseña(Anfitrion anfitrion, Scanner sc) {
         int opcionHuesped = -1;

@@ -10,5 +10,5 @@ public class SoporteLegal implements ResuelveReporte {
     public void resolverReporte(Reporte r) {
         System.out.println("Soporte Legal revisa y cierra el incidente.");
         r.setResuelto(true);
-    } 
+    }
 }

@@ -33,6 +33,7 @@ public class MenuAnfitrion {
                     break;
                 case 3:
                     System.out.println("Manejando incidentes...");
+                    AnfitrionManager.manejarIncidentes(anfitrion, sc);
                     break;
                 case 4:
                     System.out.println("Haciendo reseña...");
