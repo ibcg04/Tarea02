@@ -7,6 +7,7 @@ public class Propiedad {
     private ArrayList<Unidad> unidades;
     private Anfitrion propietario;
     private ArrayList<Reseña> reseñas;
+    private ArrayList<Servicio> servicios;
 
     public void setUnidades(ArrayList<Unidad> unidades) {
         this.unidades = unidades;
@@ -15,6 +16,9 @@ public class Propiedad {
         this.propietario = propietario;
     }
 
+    public ArrayList<Servicio> getServicios() {
+        return servicios;
+    }
 
 
     public void setReseñas(ArrayList<Reseña> reseñas) {
@@ -28,6 +32,7 @@ public class Propiedad {
         this.unidades = unidades;
         this.propietario = propietario;
         this.reseñas = reseñas;
+        this.servicios = new ArrayList<>();
     }
 
 
@@ -83,4 +88,6 @@ public class Propiedad {
             }
         }
     }
+
+    
 }

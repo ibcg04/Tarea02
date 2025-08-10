@@ -92,6 +92,10 @@ public class AnfitrionManager {
         int opcionHuesped = -1;
         while (true) {
         anfitrion.mostrarHistorialOcupantes();
+        if (anfitrion.getHistorialOcupantes().isEmpty()) {
+            System.out.println("No hay Huespedes para reseñar.");
+            return;
+        }
         System.out.print("Seleccione un Huesped para Reseñar: (1 a " + anfitrion.getHistorialOcupantes().size() + "): ");
         if (sc.hasNextInt()) {
             opcionHuesped = sc.nextInt();

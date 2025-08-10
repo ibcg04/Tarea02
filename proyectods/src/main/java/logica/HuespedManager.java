@@ -6,12 +6,16 @@ import java.util.Scanner;
 import ec.edu.espol.MenuHuesped;
 import modelo.Anfitrion;
 import modelo.BaseDatos;
+import modelo.Casa;
+import modelo.DepartamentoCompleto;
+import modelo.HabitacionPrivada;
 import modelo.Huesped;
 import modelo.Propiedad;
+import modelo.Servicio;
 import modelo.Unidad;
 
 public class HuespedManager {
-    public void buscarPropiedades(Huesped huesped, Scanner sc) {
+    public static void buscarPropiedades(Huesped huesped, Scanner sc) {
         System.out.println("==========Buscar Propiedades==========");
         System.out.println("1. Buscar por ubicación");
         System.out.println("2. Buscar por precio");
@@ -28,7 +32,7 @@ public class HuespedManager {
                 System.out.println("Ingrese la ubicación que desea buscar:");
                 sc.nextLine(); // Limpiar el buffer
                 String ubicacion = sc.nextLine();
-                buscarPorUbicacion(ubicacion, sc, huesped);
+                HuespedManager.buscarPorUbicacion(ubicacion, sc, huesped);
                 break;
             case 2:
                 System.out.println("Buscando por precio...");
@@ -49,16 +53,119 @@ public class HuespedManager {
                     sc.nextLine(); // limpiar entrada inválida
                     }
                 }
-                buscarPorPrecio(precioMaximo, sc, huesped);
+                HuespedManager.buscarPorPrecio(precioMaximo, sc, huesped);
                 break;
             case 3:
                 System.out.println("Buscando por tipo de propiedad...");
-                System.out.println("Ingrese el tipo de propiedad que desea buscar:"); //CASA, DEPARTAMENTO, HABITACION
+                System.out.println("Ingrese el tipo de propiedad que desea buscar(CASA, DEPARTAMENTO, HABITACION):");
+                sc.nextLine(); // Limpiar el buffer
                 String tipoPropiedad = sc.nextLine().trim().toUpperCase();
-                
+                 // Limpiar el buffer
+                ArrayList<Propiedad> propiedades = HuespedManager.mostrarPropiedades(sc);
+                        if (propiedades.isEmpty()) {
+                            System.out.println("No hay propiedades de tipo " + tipoPropiedad + " disponibles.");
+                        }    
+                        else{
+                            System.out.println("Propiedades de tipo " + tipoPropiedad + ":");
+                        }
+                switch (tipoPropiedad) {
+                    case "CASA":
+                        int enumeracion1  = 1; 
+                        for (Propiedad p : propiedades) {
+                            for(Unidad u : p.getUnidades()) {
+                                if((u instanceof Casa) && u.estaDisponible()) {
+                                    System.out.println(enumeracion1 + ".- " + p.getUbicacion() + " - " + u);
+                                    enumeracion1++;
+                                }
+                            }
+                        }
+                        break;
+                    case "DEPARTAMENTO":
+                        int enumeracion2  = 1; 
+                        for (Propiedad p : propiedades) {
+                            for(Unidad u : p.getUnidades()) {
+                                if ((u instanceof DepartamentoCompleto) && u.estaDisponible()) {
+                                    System.out.println(enumeracion2 + ".- " + p.getUbicacion() + " - " + u);
+                                    enumeracion2++;
+                                }
+                            }
+                        }                    
+                        break;
+                    case "HABITACION":
+                        int enumeracion3  = 1; 
+                        for (Propiedad p : propiedades) {
+                            for(Unidad u : p.getUnidades()) {
+                                if ((u instanceof HabitacionPrivada) && u.estaDisponible()) {
+                                    System.out.println(enumeracion3 + ".- " + p.getUbicacion() + " - " + u);
+                                    enumeracion3++;
+                                }
+                            }
+                        }               
+                        break;
+                    default:
+                        System.out.println("Tipo de propiedad no válido.");
+                }
                 break;
             case 4:
                 System.out.println("Buscando por servicios...");
+                ArrayList<Propiedad> propiedadesConServicio = mostrarPropiedades(sc);
+                if (propiedadesConServicio.isEmpty()) {
+                    System.out.println("No hay propiedades disponibles.");
+                    return;
+                }
+                System.out.println("Ingrese el servicio que desea buscar (PetFriendly, WiFi, Piscina, Estacionamiento):");
+                String servicioBuscado = sc.nextLine().trim();
+                int enumeracion4  = 1;
+                for (Propiedad p : propiedadesConServicio) {
+                    for (Servicio s : p.getServicios()) {
+                        if (s.name().toUpperCase().equalsIgnoreCase(servicioBuscado.toUpperCase()) ) {
+                            System.out.println(enumeracion4 + ".- " + p.getUbicacion() + " - Servicios: " + p.getServicios());
+                            enumeracion4++;
+                        }
+                    }
+                }
+                if (enumeracion4 == 1) {
+                    System.out.println("No se encontraron propiedades con el servicio: " + servicioBuscado);
+                } else {
+                System.out.println("Escoger una propiedad para reservar:");
+                int opcionPropiedad = sc.nextInt();
+                sc.nextLine(); // Limpiar el buffer
+                if (opcionPropiedad >= 1 && opcionPropiedad <= propiedadesConServicio.size()) {
+                    Propiedad propiedadSeleccionada = propiedadesConServicio.get(opcionPropiedad - 1);
+                    propiedadSeleccionada.mostrarUnidades();
+                    if (propiedadSeleccionada.getUnidades().isEmpty()) {
+                        System.out.println("No hay unidades disponibles en esta propiedad.");
+                        return;
+                    }
+                    System.out.print("Seleccione la Unidad que deseas RESERVAR : (1 a " +  propiedadSeleccionada.getUnidades().size() + "): ");
+                    int opcionUnidad = -1;  
+                    while (true) {
+                        if (sc.hasNextInt()) {
+                            opcionUnidad = sc.nextInt();
+                            sc.nextLine();
+                            
+                            if (opcionUnidad >= 1 && opcionUnidad <= propiedadSeleccionada.getUnidades().size()) {
+                                break; // entrada válida, salir del bucle
+                            } else {
+                                System.out.println("Número fuera de rango. Intente nuevamente.");
+                            }
+                            
+                        } else {
+                            System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                            sc.nextLine(); // limpiar entrada inválida
+                        }
+                    }
+                    Unidad unidadSeleccionada = propiedadSeleccionada.getUnidades().get(opcionUnidad - 1);
+                    huesped.reservar(unidadSeleccionada);
+                    System.out.println("Reserva realizada con éxito.");
+                } else {
+                    System.out.println("Opción de propiedad no válida.");
+                }
+                }
+
+            
+
+
                 break;
             case 5:
                 System.out.println("Volviendo al menú principal...");
@@ -90,6 +197,10 @@ public class HuespedManager {
 
         while (true) {
         ArrayList<Propiedad> propiedadesReservar = HuespedManager.mostrarPropiedades(sc);
+        if(propiedadesReservar.isEmpty()){
+            System.out.println("No hay propiedades disponibles para reservar.");
+            return;
+        }
         System.out.print("Seleccione una Propiedad: (1 a " +  propiedadesReservar.size() + "): ");
         if (sc.hasNextInt()) {
             opcionReserva = sc.nextInt();
@@ -165,13 +276,14 @@ public class HuespedManager {
 
     public static void reportarIncidente(Huesped huesped, Scanner sc) {
         System.out.print("Describe el incidente: ");
-        sc.nextLine(); 
+        
         String mensaje = sc.nextLine();
         // Dispara la lógica de reportes del huésped
         huesped.reportar(mensaje);
+
     } 
 
-    public ArrayList<Unidad> precioMax(double precioMaximo) {
+    public static ArrayList<Unidad> precioMax(double precioMaximo) {
         ArrayList<Unidad> unidades = new ArrayList<>();
         for (Anfitrion anfitrion : BaseDatos.getDataBase().getAnfitriones().values()) {
             for (Propiedad propiedad : anfitrion.getPropiedades()) {
@@ -185,7 +297,7 @@ public class HuespedManager {
         return unidades;
     }
 
-    public ArrayList<Unidad> ubicacionSearch(String ubicacion) {
+    public static ArrayList<Unidad> ubicacionSearch(String ubicacion) {
         ArrayList<Unidad> unidades = new ArrayList<>();
         for (Anfitrion anfitrion : BaseDatos.getDataBase().getAnfitriones().values()) {
             for (Propiedad propiedad : anfitrion.getPropiedades()) {
@@ -199,7 +311,7 @@ public class HuespedManager {
         return unidades;
     }
 
-    public void buscarPorUbicacion(String ubicacion, Scanner sc, Huesped huesped){
+    public static void buscarPorUbicacion(String ubicacion, Scanner sc, Huesped huesped){
         ArrayList<Unidad> unidades2 = ubicacionSearch(ubicacion);
         int enumeration = 1;
         if (unidades2.isEmpty()){
@@ -241,7 +353,7 @@ public class HuespedManager {
     }
 }
 
-    public void buscarPorPrecio(double precioMaximo, Scanner sc, Huesped huesped){
+    public static void buscarPorPrecio(double precioMaximo, Scanner sc, Huesped huesped){
         ArrayList<Unidad> unidades = precioMax(precioMaximo);
         int enumeration2 = 1;
         if (unidades.isEmpty()) {
