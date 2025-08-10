@@ -11,7 +11,7 @@ import modelo.Propiedad;
 import modelo.Unidad;
 
 public class HuespedManager {
-    public void buscarPropiedades(Huesped huesped) {
+    public void buscarPropiedades(Huesped huesped, Scanner sc) {
         System.out.println("==========Buscar Propiedades==========");
         System.out.println("1. Buscar por ubicación");
         System.out.println("2. Buscar por precio");
@@ -19,19 +19,43 @@ public class HuespedManager {
         System.out.println("4. Buscar por servicios");
         System.out.println("5. Volver al menú principal");
 
-        Scanner sc = new Scanner(System.in);
+        
         int opcion = sc.nextInt();
 
         switch (opcion) {
             case 1:
                 System.out.println("Buscando por ubicación...");
-                
+                System.out.println("Ingrese la ubicación que desea buscar:");
+                sc.nextLine(); // Limpiar el buffer
+                String ubicacion = sc.nextLine();
+                buscarPorUbicacion(ubicacion, sc, huesped);
                 break;
             case 2:
                 System.out.println("Buscando por precio...");
+                System.out.println("Ingrese el precio máximo: ");
+                double precioMaximo = -1;                
+                while (true) {
+                System.out.println("Ingrese el valora maximo que desea buscar;");
+                if (sc.hasNextDouble()) {
+                    precioMaximo = sc.nextDouble();
+                    sc.nextLine(); // limpiar buffer                   
+                    if (precioMaximo >= 1) {
+                        break; // entrada válida, salir del bucle
+                    } else {
+                        System.out.println("Número fuera de rango. Intente nuevamente.");
+                    }                    
+                } else {
+                    System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                    sc.nextLine(); // limpiar entrada inválida
+                    }
+                }
+                buscarPorPrecio(precioMaximo, sc, huesped);
                 break;
             case 3:
                 System.out.println("Buscando por tipo de propiedad...");
+                System.out.println("Ingrese el tipo de propiedad que desea buscar:"); //CASA, DEPARTAMENTO, HABITACION
+                String tipoPropiedad = sc.nextLine().trim().toUpperCase();
+                
                 break;
             case 4:
                 System.out.println("Buscando por servicios...");
@@ -43,8 +67,8 @@ public class HuespedManager {
             default:
                 break;
         }
-
     }
+
     public static ArrayList<Propiedad> mostrarPropiedades(Scanner sc){
         int enumeration = 1;
         ArrayList<Propiedad> propiedades = new ArrayList<>();
@@ -58,6 +82,7 @@ public class HuespedManager {
     }
     return propiedades;
 }
+
     public static void reservarPropiedad(Huesped huesped, Scanner sc) {
     System.out.println("Reservando Propiedad...");
         System.out.println("Propiedades disponibles:");
@@ -109,7 +134,7 @@ public class HuespedManager {
     }
     public static void generarReseña(Huesped huesped, Scanner sc) {
         System.out.println("Generando reseña...");
-        System.out.print("Ingrese la calificación (1-5): ");
+        System.out.println("Ingrese la calificación (1-5): ");
         int calificacion = -1;
         while (true) {
             if (sc.hasNextInt()) {
@@ -144,6 +169,121 @@ public class HuespedManager {
         String mensaje = sc.nextLine();
         // Dispara la lógica de reportes del huésped
         huesped.reportar(mensaje);
+    } 
+
+    public ArrayList<Unidad> precioMax(double precioMaximo) {
+        ArrayList<Unidad> unidades = new ArrayList<>();
+        for (Anfitrion anfitrion : BaseDatos.getDataBase().getAnfitriones().values()) {
+            for (Propiedad propiedad : anfitrion.getPropiedades()) {
+                for (Unidad unidad : propiedad.getUnidades()) {
+                    if (unidad.estaDisponible() && unidad.getPrecio() <= precioMaximo) {
+                        unidades.add(unidad);
+                    }
+                }
+            }
+        }
+        return unidades;
     }
-  
+
+    public ArrayList<Unidad> ubicacionSearch(String ubicacion) {
+        ArrayList<Unidad> unidades = new ArrayList<>();
+        for (Anfitrion anfitrion : BaseDatos.getDataBase().getAnfitriones().values()) {
+            for (Propiedad propiedad : anfitrion.getPropiedades()) {
+                for (Unidad unidad : propiedad.getUnidades()) {
+                    if (unidad.estaDisponible() && unidad.getPropiedad().getUbicacion().equalsIgnoreCase(ubicacion)) {
+                        unidades.add(unidad);
+                    }
+                }
+            }
+        }
+        return unidades;
+    }
+
+    public void buscarPorUbicacion(String ubicacion, Scanner sc, Huesped huesped){
+        ArrayList<Unidad> unidades2 = ubicacionSearch(ubicacion);
+        int enumeration = 1;
+        if (unidades2.isEmpty()){
+            System.out.println("No se encontraron unidades disponibles en esa ubicación.");
+        } else {
+            System.out.println("Unidades disponibles en " + ubicacion + ":");
+            for (Unidad unidad : unidades2) {
+                System.out.println("Unidad# " + enumeration);
+                enumeration++;
+                unidad.mostrarDetalles();
+            }
+            System.out.println("Desea reservar alguna de estas unidades? (S/N)");
+            String respuesta = sc.nextLine().trim().toUpperCase();
+            if (respuesta.equals("S")) {
+                System.out.print("Seleccione la unidad que desea reservar (1 a " + unidades2.size() + "): ");
+                int opcionUnidad = -1;
+                while (true) {
+                    if (sc.hasNextInt()) {
+                        opcionUnidad = sc.nextInt();
+                        sc.nextLine();
+                        
+                        if (opcionUnidad >= 1 && opcionUnidad <= unidades2.size()) {
+                            break; // entrada válida, salir del bucle
+                        } else {
+                            System.out.println("Número fuera de rango. Intente nuevamente.");
+                        }
+                        
+                    } else {
+                        System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                        sc.nextLine(); // limpiar entrada inválida
+                    }
+                }
+                Unidad unidadSeleccionada = unidades2.get(opcionUnidad - 1);
+                huesped.reservar(unidadSeleccionada);
+                System.out.println("Reserva realizada con éxito.");
+            } else {
+                System.out.println("No se realizó ninguna reserva.");
+            }
+    }
 }
+
+    public void buscarPorPrecio(double precioMaximo, Scanner sc, Huesped huesped){
+        ArrayList<Unidad> unidades = precioMax(precioMaximo);
+        int enumeration2 = 1;
+        if (unidades.isEmpty()) {
+            System.out.println("No se encontraron unidades disponibles con ese precio máximo.");
+        } else {
+            System.out.println("Unidades disponibles con precio máximo de $" + precioMaximo + ":");
+            for (Unidad unidad : unidades) {
+                System.out.println("Unidad# "+enumeration2);
+                enumeration2++;
+                unidad.mostrarDetalles();
+            }
+            System.out.println("Desea reservar alguna de estas unidades? (S/N)");
+            String respuesta = sc.nextLine().trim().toUpperCase();
+            if (respuesta.equals("S")) {
+                System.out.println("Seleccione la unidad que desea reservar (1 a " + unidades.size() + "): ");
+                int opcionUnidad2 = -1;
+                while (true) {
+                    if (sc.hasNextInt()) {
+                        opcionUnidad2 = sc.nextInt();
+                        sc.nextLine();
+                        
+                        if (opcionUnidad2 >= 1 && opcionUnidad2 <= unidades.size()) {
+                            break; // entrada válida, salir del bucle
+                        } else {
+                            System.out.println("Número fuera de rango. Intente nuevamente.");
+                        }
+                        
+                    } else {
+                        System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                        sc.nextLine(); // limpiar entrada inválida
+                    }
+                }
+                
+                Unidad unidadSeleccionada = unidades.get(opcionUnidad2 - 1);
+                huesped.reservar(unidadSeleccionada);
+                System.out.println("Reserva realizada con éxito.");
+            } else {
+                System.out.println("No se realizó ninguna reserva.");
+            }
+            
+        }
+    }
+    
+}
+
