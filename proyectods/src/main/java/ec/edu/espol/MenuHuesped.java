@@ -26,7 +26,7 @@ public class MenuHuesped {
             switch (opcion) {
                 case 1:
                     System.out.println("Buscando Propiedades...");
-                    HuespedManager.mostrarPropiedades(sc);
+                    HuespedManager.buscarPropiedades(huesped, sc);
                     break;
                 case 2:
                     System.out.println("Reservando Propiedad...");

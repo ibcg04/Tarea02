@@ -28,6 +28,7 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
     public Anfitrion(String nombre, int id) {
         super(nombre, id);
         this.propiedades = new ArrayList<>();
+        this.historialOcupantes = new ArrayList<>();
     }
     public void setNextHandler(ResuelveReporte nextHandler) {
         this.nextHandler = nextHandler;
@@ -141,6 +142,7 @@ public void agregarPropiedad(Propiedad propiedad) {
         }
     }
 
+    @Override
     public void mostrarReseñas() {
         System.out.println("Reseñas recibidas:");
         for (Propiedad p : propiedades) {
