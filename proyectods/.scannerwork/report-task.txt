@@ -1,6 +1,0 @@
-projectKey=HomeStay
-serverUrl=http://localhost:32768
-serverVersion=25.8.0.112029
-dashboardUrl=http://localhost:32768/dashboard?id=HomeStay
-ceTaskId=10f91247-fcb2-4f43-91e5-e0cf9ed4179f
-ceTaskUrl=http://localhost:32768/api/ce/task?id=10f91247-fcb2-4f43-91e5-e0cf9ed4179f

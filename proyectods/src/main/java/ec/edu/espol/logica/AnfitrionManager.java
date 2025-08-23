@@ -65,7 +65,7 @@ public class AnfitrionManager {
     }
         
 }
-    public static void manejarIncidentes(Anfitrion anfitrion, Scanner sc) {
+    public static void manejarIncidentes(Anfitrion anfitrion) {
         if (anfitrion.getReportes().isEmpty()) {
             System.out.println("No hay reportes pendientes.");
             return;

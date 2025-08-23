@@ -15,6 +15,9 @@ import ec.edu.espol.modelo.Servicio;
 import ec.edu.espol.modelo.Unidad;
 
 public class HuespedManager {
+    public HuespedManager(){
+        throw new IllegalStateException("Utility Class");
+    }
     public static void buscarPropiedades(Huesped huesped, Scanner sc) {
         System.out.println("==========Buscar Propiedades==========");
         System.out.println("1. Buscar por ubicación");
@@ -289,7 +292,7 @@ public class HuespedManager {
 
     } 
 
-    public static ArrayList<Unidad> precioMax(double precioMaximo) {
+    public static ArrayList<Unidad> buscarPrecioMaximo(double precioMaximo) {
         ArrayList<Unidad> unidades = new ArrayList<>();
         for (Anfitrion anfitrion : BaseDatos.getDataBase().getAnfitriones().values()) {
             for (Propiedad propiedad : anfitrion.getPropiedades()) {
@@ -303,7 +306,7 @@ public class HuespedManager {
         return unidades;
     }
 
-    public static ArrayList<Unidad> ubicacionSearch(String ubicacion) {
+    public static ArrayList<Unidad> busquedaPorUbicacion(String ubicacion) {
         ArrayList<Unidad> unidades = new ArrayList<>();
     if (ubicacion == null) throw new NullPointerException("ubicacion no puede ser null");
         for (Anfitrion anfitrion : BaseDatos.getDataBase().getAnfitriones().values()) {
@@ -319,8 +322,7 @@ public class HuespedManager {
     }
 
     public static void buscarPorUbicacion(String ubicacion, Scanner sc, Huesped huesped){
-        ArrayList<Unidad> unidades2 = ubicacionSearch(ubicacion);
-    if (ubicacion == null) throw new NullPointerException("ubicacion no puede ser null");
+        ArrayList<Unidad> unidades2 = busquedaPorUbicacion(ubicacion);
         int enumeration = 1;
         if (unidades2.isEmpty()){
             System.out.println("No se encontraron unidades disponibles en esa ubicación.");
@@ -362,7 +364,7 @@ public class HuespedManager {
 }
 
     public static void buscarPorPrecio(double precioMaximo, Scanner sc, Huesped huesped){
-        ArrayList<Unidad> unidades = precioMax(precioMaximo);
+        ArrayList<Unidad> unidades = buscarPrecioMaximo(precioMaximo);
         int enumeration2 = 1;
         if (unidades.isEmpty()) {
             System.out.println("No se encontraron unidades disponibles con ese precio máximo.");

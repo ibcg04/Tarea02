@@ -7,6 +7,10 @@ import ec.edu.espol.modelo.Huesped;
 
 public class RegistrarUsuario {
 
+    public RegistrarUsuario(){
+        throw new IllegalStateException("Utility Class");
+    }
+
     public static void registro(Scanner sc) {
         while (true) {
             System.out.println("==========Registro de Usuario==========");

@@ -27,35 +27,35 @@ class HuespedManagerTest {
     @Test
     @DisplayName("Retorna lista de unidades con precio menor o igual al máximo (caso normal)")
     void testPrecioMaxNormal() {
-    ArrayList<Unidad> unidades = HuespedManager.precioMax(1000.0);
+    ArrayList<Unidad> unidades = HuespedManager.buscarPrecioMaximo(1000.0);
         assertNotNull(unidades);
     }
 
     @Test
     @DisplayName("Retorna lista vacía si el precio máximo es negativo")
     void testPrecioMaxNegativo() {
-    ArrayList<Unidad> unidades = HuespedManager.precioMax(-10.0);
+    ArrayList<Unidad> unidades = HuespedManager.buscarPrecioMaximo(-10.0);
         assertTrue(unidades.isEmpty());
     }
 
     @Test
     @DisplayName("Busca unidades por ubicación válida")
     void testUbicacionSearchNormal() {
-    ArrayList<Unidad> unidades = HuespedManager.ubicacionSearch("Quito");
+    ArrayList<Unidad> unidades = HuespedManager.busquedaPorUbicacion("Quito");
         assertNotNull(unidades);
     }
 
     @Test
     @DisplayName("Busca unidades con ubicación vacía")
     void testUbicacionSearchVacia() {
-    ArrayList<Unidad> unidades = HuespedManager.ubicacionSearch("");
+    ArrayList<Unidad> unidades = HuespedManager.busquedaPorUbicacion("");
         assertNotNull(unidades);
     }
 
     @Test
     @DisplayName("Lanza excepción si la ubicación es nula")
     void testUbicacionSearchNula() {
-    assertThrows(NullPointerException.class, () -> HuespedManager.ubicacionSearch(null));
+    assertThrows(NullPointerException.class, () -> HuespedManager.busquedaPorUbicacion(null));
     }
 
     @Test
