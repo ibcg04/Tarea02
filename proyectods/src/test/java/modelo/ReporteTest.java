@@ -1,6 +1,9 @@
 package modelo;
 
 import org.junit.jupiter.api.Test;
+
+import ec.edu.espol.modelo.Reporte;
+
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 

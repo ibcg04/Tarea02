@@ -1,6 +1,9 @@
 package notificaciones;
 
 import org.junit.jupiter.api.Test;
+
+import ec.edu.espol.notificaciones.Mensajeria;
+
 import org.junit.jupiter.api.DisplayName;
 
 class MensajeriaTest {

@@ -3,6 +3,12 @@ package modelo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import ec.edu.espol.modelo.Anfitrion;
+import ec.edu.espol.modelo.Regla;
+import ec.edu.espol.modelo.Reseña;
+import ec.edu.espol.modelo.Usuario;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Date;

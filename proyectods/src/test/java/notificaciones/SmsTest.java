@@ -1,6 +1,9 @@
 package notificaciones;
 
 import org.junit.jupiter.api.Test;
+
+import ec.edu.espol.notificaciones.Sms;
+
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 

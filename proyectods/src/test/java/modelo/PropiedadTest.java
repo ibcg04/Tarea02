@@ -1,6 +1,11 @@
 package modelo;
 
 import org.junit.jupiter.api.Test;
+
+import ec.edu.espol.modelo.Propiedad;
+import ec.edu.espol.modelo.Reseña;
+import ec.edu.espol.modelo.Unidad;
+
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 

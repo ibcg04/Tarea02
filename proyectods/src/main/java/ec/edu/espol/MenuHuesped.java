@@ -1,8 +1,8 @@
 package ec.edu.espol;
 import java.util.Scanner;
 
-import logica.HuespedManager;
-import modelo.Huesped;
+import ec.edu.espol.logica.HuespedManager;
+import ec.edu.espol.modelo.Huesped;
 
 public class MenuHuesped {
    public static void mostrarMenu(Huesped huesped, Scanner sc) {

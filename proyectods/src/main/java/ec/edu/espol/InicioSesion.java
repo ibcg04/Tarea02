@@ -1,9 +1,9 @@
 package ec.edu.espol;
 import java.util.Scanner;
 
-import modelo.Anfitrion;
-import modelo.BaseDatos;
-import modelo.Huesped;
+import ec.edu.espol.modelo.Anfitrion;
+import ec.edu.espol.modelo.BaseDatos;
+import ec.edu.espol.modelo.Huesped;
 
 public class InicioSesion {
     public static void iniciarSesionHuesped(Scanner sc) {

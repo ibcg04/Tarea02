@@ -1,8 +1,8 @@
 package ec.edu.espol;
 import java.util.Scanner;
 
-import logica.AnfitrionManager;
-import modelo.Anfitrion;
+import ec.edu.espol.logica.AnfitrionManager;
+import ec.edu.espol.modelo.Anfitrion;
 
 public class MenuAnfitrion {
     public static void mostrarMenu(Anfitrion anfitrion, Scanner sc) {
