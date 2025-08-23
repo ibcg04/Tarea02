@@ -2,12 +2,12 @@ package ec.edu.espol.logica;
 
 import java.util.Scanner;
 
-import ec.edu.espol.modelo.Anfitrion;
-import ec.edu.espol.modelo.Huesped;
-import ec.edu.espol.modelo.Moderador;
-import ec.edu.espol.modelo.Propiedad;
-import ec.edu.espol.modelo.Reporte;
-import ec.edu.espol.modelo.SoporteLegal;
+import modelo.Anfitrion;
+import modelo.Huesped;
+import modelo.Moderador;
+import modelo.Propiedad;
+import modelo.Reporte;
+import modelo.SoporteLegal;
 
 public class AnfitrionManager {
     
@@ -88,54 +88,43 @@ public class AnfitrionManager {
     }
         }
 
-    public static void generarReseña(Anfitrion anfitrion, Scanner sc) {
-        int opcionHuesped = -1;
-        while (true) {
+public static void generarReseña(Anfitrion anfitrion, Scanner sc) {
         anfitrion.mostrarHistorialOcupantes();
         if (anfitrion.getHistorialOcupantes().isEmpty()) {
             System.out.println("No hay Huespedes para reseñar.");
             return;
         }
-        System.out.print("Seleccione un Huesped para Reseñar: (1 a " + anfitrion.getHistorialOcupantes().size() + "): ");
-        if (sc.hasNextInt()) {
-            opcionHuesped = sc.nextInt();
-            sc.nextLine();
-            
-            if (opcionHuesped >= 1 && opcionHuesped <= anfitrion.getHistorialOcupantes().size()) {
-                break; // entrada válida, salir del bucle
-            } else {
-                System.out.println("Número fuera de rango. Intente nuevamente.");
-            }
-            
-        } else {
-            System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
-            sc.nextLine(); // limpiar entrada inválida
-        }
-        Huesped huespedReseñar = anfitrion.getHistorialOcupantes().get(opcionHuesped - 1);
-        System.out.println("Haciendo reseña...");
-        System.out.print("Ingrese la calificación (1-5): ");
-        int calificacion = -1;
-        while (true) {
-            if (sc.hasNextInt()) {
-                calificacion = sc.nextInt();
-                sc.nextLine();
 
-                if (calificacion >= 1 && calificacion <= 5) {
-                    break; // entrada válida, salir del bucle
-                } else {
-                    System.out.println("Número fuera de rango de calificacion. Intente nuevamente.");
-                }
-            }    
-             else {
-                System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
-                sc.nextLine(); // limpiar entrada inválida
-            }
-        } 
-        System.out.print("Ingrese la descripción de la reseña: ");
-        String descripcion = sc.nextLine();
-        
+        Huesped huespedReseñar = seleccionarHuesped(anfitrion, sc);
+
+        System.out.println("Haciendo reseña...");
+        int calificacion = solicitarCalificacion(sc);
+
+        String descripcion = solicitarDescripcion(sc);
+
         anfitrion.reseñar(calificacion, descripcion, huespedReseñar);
         System.out.println("Reseña agregada exitosamente.");
     }
-}
+     private static Huesped seleccionarHuesped(Anfitrion anfitrion, Scanner sc) {
+        int opcionHuesped = EntradaUtils.validarEntradaEntero(
+            sc,
+            "Seleccione un Huesped para Reseñar: (1 a " + anfitrion.getHistorialOcupantes().size() + "): ",
+            1,
+            anfitrion.getHistorialOcupantes().size()
+        );
+        return anfitrion.getHistorialOcupantes().get(opcionHuesped - 1);
+    }
+
+    private static int solicitarCalificacion(Scanner sc) {
+        return EntradaUtils.validarEntradaEntero(
+            sc,
+            "Ingrese la calificación (1-5): ",
+            1,
+            5
+        );
+    }
+       private static String solicitarDescripcion(Scanner sc) {
+        System.out.print("Ingrese la descripción de la reseña: ");
+        return sc.nextLine();
+    }
 }
