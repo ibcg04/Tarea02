@@ -2,12 +2,15 @@ package ec.edu.espol.logica;
 
 import java.util.Scanner;
 
-import modelo.Anfitrion;
-import modelo.Huesped;
-import modelo.Moderador;
-import modelo.Propiedad;
-import modelo.Reporte;
-import modelo.SoporteLegal;
+import ec.edu.espol.modelo.Anfitrion;
+import ec.edu.espol.modelo.Huesped;
+import ec.edu.espol.modelo.Moderador;
+import ec.edu.espol.modelo.Propiedad;
+import ec.edu.espol.modelo.Reporte;
+import ec.edu.espol.modelo.SoporteLegal;
+import utilidades.EntradaUtils;
+
+
 
 public class AnfitrionManager {
     

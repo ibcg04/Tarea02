@@ -3,8 +3,12 @@ import java.util.Scanner;
 
 import ec.edu.espol.logica.HuespedManager;
 import ec.edu.espol.modelo.Huesped;
+import ec.edu.espol.ui.HuespedUI;
 
 public class MenuHuesped {
+    private MenuHuesped(){
+        throw new IllegalStateException("Utility Class");
+    }
    public static void mostrarMenu(Huesped huesped, Scanner sc) {
         if (huesped == null) {
             System.out.println("No se ha iniciado sesión como Huesped.");
@@ -26,11 +30,11 @@ public class MenuHuesped {
             switch (opcion) {
                 case 1:
                     System.out.println("Buscando Propiedades...");
-                    HuespedManager.buscarPropiedades(huesped, sc);
+                    HuespedUI.buscarPropiedades(huesped, sc);
                     break;
                 case 2:
                     System.out.println("Reservando Propiedad...");
-                    HuespedManager.reservarPropiedad(huesped, sc);
+                    HuespedUI.reservarPropiedad(huesped, sc);
                     break;
                 case 3:
                     System.out.println("Ver Reserva...");
@@ -38,11 +42,11 @@ public class MenuHuesped {
                     break;
                 case 4:
                     System.out.println("Haciendo reseña...");
-                    HuespedManager.generarReseña(huesped, sc);
+                    HuespedUI.generarReseña(huesped, sc);
                     break;
                 case 5:
                     System.out.println("Reportando incidente...");
-                    HuespedManager.reportarIncidente(huesped, sc);
+                    HuespedUI.reportarIncidente(huesped, sc);
                     break;
                 case 6:
                     System.out.println("Saliendo...");

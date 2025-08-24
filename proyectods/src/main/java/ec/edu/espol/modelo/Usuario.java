@@ -15,10 +15,11 @@ public class Usuario {
         this.nombre = nombre;
     }
     public ArrayList<Reseña> getReseñas() {
-        return reseñas;
+        return new ArrayList<>(reseñas);
     }
     public void setReseñas(ArrayList<Reseña> reseñas) {
-        this.reseñas = reseñas;
+        if (reseñas == null) throw new IllegalArgumentException("La lista de reseñas no puede ser nula");
+        this.reseñas = new ArrayList<>(reseñas);
     }
     public int getID() {
         return id;
@@ -36,14 +37,5 @@ public class Usuario {
         reseñas.add(reseña);
     }
 
-    public void mostrarReseñas() {
-        if (reseñas.isEmpty()) {
-            System.out.println("No hay reseñas para este usuario.");
-        } else {
-            System.out.println("Reseñas de " + nombre + ":");
-            for (Reseña r : reseñas) {
-                System.out.println("- " + r.getCalificacion() + ": " + r.getDescripcion());
-            }
-        }
-    }
+    // El método mostrarReseñas debe estar en la capa de presentación/UI
 }
