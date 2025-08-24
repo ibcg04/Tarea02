@@ -1,15 +1,15 @@
 package logica;
 
+import java.util.Scanner;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ec.edu.espol.logica.AnfitrionManager;
-import ec.edu.espol.modelo.*;
-
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.*;
+import ec.edu.espol.modelo.Anfitrion;
 
 class AnfitrionManagerTest {
     private Anfitrion anfitrion;

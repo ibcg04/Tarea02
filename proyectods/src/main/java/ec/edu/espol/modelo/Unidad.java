@@ -37,6 +37,10 @@ public class Unidad {
         return precio;
     }
 
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
     public EstadoAlojamiento getEstadoAlojamiento() {
         return estado;
     }
