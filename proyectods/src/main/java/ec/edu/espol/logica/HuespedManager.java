@@ -1,12 +1,19 @@
 package ec.edu.espol.logica;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
+import ec.edu.espol.MenuHuesped;
 import ec.edu.espol.modelo.Anfitrion;
 import ec.edu.espol.modelo.BaseDatos;
+import ec.edu.espol.modelo.Casa;
+import ec.edu.espol.modelo.DepartamentoCompleto;
+import ec.edu.espol.modelo.HabitacionPrivada;
 import ec.edu.espol.modelo.Huesped;
 import ec.edu.espol.modelo.Propiedad;
+import ec.edu.espol.modelo.Servicio;
 import ec.edu.espol.modelo.Unidad;
+import ec.edu.espol.logica.BuscadorPropiedades;
 
 public class HuespedManager {
     public HuespedManager(){
@@ -20,8 +27,7 @@ public class HuespedManager {
         }
     }
 
-    // ...otros métodos de lógica de negocio...
-    // Puedes refactorizar mostrarPropiedades para que solo devuelva la lista, sin imprimir
+
     public static ArrayList<Propiedad> obtenerPropiedadesDisponibles() {
         ArrayList<Propiedad> propiedades = new ArrayList<>();
         for(Anfitrion a: BaseDatos.getDataBase().getAnfitriones().values()){
@@ -30,8 +36,7 @@ public class HuespedManager {
         return propiedades;
     }
 
-    // El método reservarPropiedad y mostrarPropiedades con interacción de usuario deben migrar a la UI
-    // Lógica de negocio para generar reseña
+
     public static boolean generarReseña(Huesped huesped, int calificacion, String descripcion) {
         if (huesped.getUnidadOcupada() != null) {
             Anfitrion anfi =  huesped.getUnidadOcupada().getPropiedad().getPropietario();
