@@ -41,109 +41,110 @@
         }
 
         switch (opcion) {
-            case 1: {
-                System.out.println("Buscando por ubicación...");
-                System.out.print("Ingrese la ubicación que desea buscar: ");
-                String ubicacion = sc.nextLine();
-                ArrayList<Unidad> unidades = BuscadorPropiedades.buscarPorUbicacion(ubicacion);
-                mostrarUnidadesYReservar(unidades, huesped, sc);
-                break;
-            }
-            case 2: {
-                System.out.println("Buscando por precio...");
-                double precioMaximo = -1;
-                while (true) {
-                    System.out.print("Ingrese el valor máximo que desea buscar: ");
-                    if (sc.hasNextDouble()) {
-                        precioMaximo = sc.nextDouble();
-                        sc.nextLine();
-                        if (precioMaximo >= 1) {
-                            break;
-                        } else {
-                            System.out.println(MSG_NUMERO_FUERA_RANGO);
-                        }
-                    } else {
-                        System.out.println("Entrada inválida. Por favor, ingrese un número válido.");
-                        sc.nextLine();
-                    }
-                }
-                ArrayList<Unidad> unidades = BuscadorPropiedades.buscarPorPrecio(precioMaximo);
-                mostrarUnidadesYReservar(unidades, huesped, sc);
-                break;
-            }
-            case 3: {
-                System.out.println("Buscando por tipo de propiedad...");
-                System.out.print("Ingrese el tipo de propiedad que desea buscar (CASA, DEPARTAMENTO, HABITACION): ");
-                String tipoPropiedad = sc.nextLine().trim().toUpperCase();
-                ArrayList<Unidad> unidades = BuscadorPropiedades.buscarPorTipo(tipoPropiedad);
-                mostrarUnidadesYReservar(unidades, huesped, sc);
-                break;
-            }
-            case 4: {
-                System.out.println("Buscando por servicios...");
-                System.out.print("Ingrese el servicio que desea buscar (PetFriendly, WiFi, Piscina, Estacionamiento): ");
-                String servicioBuscado = sc.nextLine().trim();
-                ArrayList<Propiedad> propiedades = BuscadorPropiedades.buscarPorServicio(servicioBuscado);
-                int enumeracion = 1;
-                if (propiedades.isEmpty()) {
-                    System.out.println("No se encontraron propiedades con el servicio: " + servicioBuscado);
+            case 1 -> buscarPorUbicacion(huesped, sc);
+            case 2 -> buscarPorPrecio(huesped, sc);
+            case 3 -> buscarPorTipo(huesped, sc);
+            case 4 -> buscarPorServicio(huesped, sc);
+            case 5 -> System.out.println("Volviendo al menú principal...");
+            default -> {}
+        }
+
+    }
+
+    // Métodos extraídos para cada tipo de búsqueda
+    private static void buscarPorUbicacion(Huesped huesped, Scanner sc) {
+        System.out.println("Buscando por ubicación...");
+        System.out.print("Ingrese la ubicación que desea buscar: ");
+        String ubicacion = sc.nextLine();
+        ArrayList<Unidad> unidades = BuscadorPropiedades.buscarPorUbicacion(ubicacion);
+        mostrarUnidadesYReservar(unidades, huesped, sc);
+    }
+
+    private static void buscarPorPrecio(Huesped huesped, Scanner sc) {
+        System.out.println("Buscando por precio...");
+        double precioMaximo = -1;
+        while (true) {
+            System.out.print("Ingrese el valor máximo que desea buscar: ");
+            if (sc.hasNextDouble()) {
+                precioMaximo = sc.nextDouble();
+                sc.nextLine();
+                if (precioMaximo >= 1) {
+                    break;
                 } else {
-                    System.out.println("Propiedades con servicio " + servicioBuscado + ":");
-                    for (Propiedad p : propiedades) {
-                        System.out.println(enumeracion + ".- " + p.getUbicacion() + " - Servicios: " + p.getServicios());
-                        enumeracion++;
-                    }
-                    System.out.print("Escoger una propiedad para reservar: ");
-                    int opcionPropiedad = -1;
-                    while (true) {
-                        if (sc.hasNextInt()) {
-                            opcionPropiedad = sc.nextInt();
-                            sc.nextLine();
-                            if (opcionPropiedad >= 1 && opcionPropiedad <= propiedades.size()) {
-                                break;
-                            } else {
-                                System.out.println("Opción fuera de rango. Intente nuevamente.");
-                            }
-                        } else {
-                            System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
-                            sc.nextLine();
-                        }
-                    }
-                    Propiedad propiedadSeleccionada = propiedades.get(opcionPropiedad - 1);
-                    propiedadSeleccionada.mostrarUnidades();
-                    if (propiedadSeleccionada.getUnidades().isEmpty()) {
-                        System.out.println("No hay unidades disponibles en esta propiedad.");
-                        return;
-                    }
-                    System.out.print("Seleccione la Unidad que deseas RESERVAR : (1 a " + propiedadSeleccionada.getUnidades().size() + "): ");
-                    int opcionUnidad = -1;
-                    while (true) {
-                        if (sc.hasNextInt()) {
-                            opcionUnidad = sc.nextInt();
-                            sc.nextLine();
-                            if (opcionUnidad >= 1 && opcionUnidad <= propiedadSeleccionada.getUnidades().size()) {
-                                break;
-                            } else {
-                                System.out.println("Número fuera de rango. Intente nuevamente.");
-                            }
-                        } else {
-                            System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
-                            sc.nextLine();
-                        }
-                    }
-                    Unidad unidadSeleccionada = propiedadSeleccionada.getUnidades().get(opcionUnidad - 1);
-                    HuespedManager.reservarUnidad(huesped, unidadSeleccionada);
-                    System.out.println("Reserva realizada con éxito.");
+                    System.out.println(MSG_NUMERO_FUERA_RANGO);
                 }
-                break;
+            } else {
+                System.out.println("Entrada inválida. Por favor, ingrese un número válido.");
+                sc.nextLine();
             }
-            case 5: {
-                System.out.println("Volviendo al menú principal...");
-                // Aquí deberías llamar al menú principal correspondiente
-                break;
+        }
+        ArrayList<Unidad> unidades = BuscadorPropiedades.buscarPorPrecio(precioMaximo);
+        mostrarUnidadesYReservar(unidades, huesped, sc);
+    }
+
+    private static void buscarPorTipo(Huesped huesped, Scanner sc) {
+        System.out.println("Buscando por tipo de propiedad...");
+        System.out.print("Ingrese el tipo de propiedad que desea buscar (CASA, DEPARTAMENTO, HABITACION): ");
+        String tipoPropiedad = sc.nextLine().trim().toUpperCase();
+        ArrayList<Unidad> unidades = BuscadorPropiedades.buscarPorTipo(tipoPropiedad);
+        mostrarUnidadesYReservar(unidades, huesped, sc);
+    }
+
+    private static void buscarPorServicio(Huesped huesped, Scanner sc) {
+        System.out.println("Buscando por servicios...");
+        System.out.print("Ingrese el servicio que desea buscar (PetFriendly, WiFi, Piscina, Estacionamiento): ");
+        String servicioBuscado = sc.nextLine().trim();
+        ArrayList<Propiedad> propiedades = BuscadorPropiedades.buscarPorServicio(servicioBuscado);
+        int enumeracion = 1;
+        if (propiedades.isEmpty()) {
+            System.out.println("No se encontraron propiedades con el servicio: " + servicioBuscado);
+        } else {
+            System.out.println("Propiedades con servicio " + servicioBuscado + ":");
+            for (Propiedad p : propiedades) {
+                System.out.println(enumeracion + ".- " + p.getUbicacion() + " - Servicios: " + p.getServicios());
+                enumeracion++;
             }
-            default:
-                break;
+            System.out.print("Escoger una propiedad para reservar: ");
+            int opcionPropiedad = -1;
+            while (true) {
+                if (sc.hasNextInt()) {
+                    opcionPropiedad = sc.nextInt();
+                    sc.nextLine();
+                    if (opcionPropiedad >= 1 && opcionPropiedad <= propiedades.size()) {
+                        break;
+                    } else {
+                        System.out.println("Opción fuera de rango. Intente nuevamente.");
+                    }
+                } else {
+                    System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                    sc.nextLine();
+                }
+            }
+            Propiedad propiedadSeleccionada = propiedades.get(opcionPropiedad - 1);
+            propiedadSeleccionada.mostrarUnidades();
+            if (propiedadSeleccionada.getUnidades().isEmpty()) {
+                System.out.println("No hay unidades disponibles en esta propiedad.");
+                return;
+            }
+            System.out.print("Seleccione la Unidad que deseas RESERVAR : (1 a " + propiedadSeleccionada.getUnidades().size() + "): ");
+            int opcionUnidad = -1;
+            while (true) {
+                if (sc.hasNextInt()) {
+                    opcionUnidad = sc.nextInt();
+                    sc.nextLine();
+                    if (opcionUnidad >= 1 && opcionUnidad <= propiedadSeleccionada.getUnidades().size()) {
+                        break;
+                    } else {
+                        System.out.println("Número fuera de rango. Intente nuevamente.");
+                    }
+                } else {
+                    System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                    sc.nextLine();
+                }
+            }
+            Unidad unidadSeleccionada = propiedadSeleccionada.getUnidades().get(opcionUnidad - 1);
+            HuespedManager.reservarUnidad(huesped, unidadSeleccionada);
+            System.out.println("Reserva realizada con éxito.");
         }
     }
 
@@ -189,6 +190,7 @@
         HuespedManager.reservarUnidad(huesped, unidadSeleccionada);
         System.out.println(MSG_RESERVA_EXITOSA);
     }
+
 
     /**
      * Permite al usuario reservar una propiedad y una unidad disponible.
