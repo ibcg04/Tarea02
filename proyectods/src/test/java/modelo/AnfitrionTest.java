@@ -13,10 +13,6 @@ import ec.edu.espol.modelo.Regla;
 import ec.edu.espol.modelo.Reseña;
 import ec.edu.espol.modelo.Usuario;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Date;
-
 class AnfitrionTest {
     private Anfitrion anfitrion;
 
