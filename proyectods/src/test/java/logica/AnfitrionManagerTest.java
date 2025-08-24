@@ -42,7 +42,7 @@ class AnfitrionManagerTest {
     @Test
     @DisplayName("Lanza excepción si el anfitrión es nulo en manejarIncidentes")
     void testManejarIncidentesNulo() {
-        assertThrows(NullPointerException.class, () -> AnfitrionManager.manejarIncidentes(null);
+        assertThrows(NullPointerException.class, () -> AnfitrionManager.manejarIncidentes(null));
     }
 
     @Test
@@ -50,4 +50,14 @@ class AnfitrionManagerTest {
     void testGenerarReseñaNulo() {
         assertThrows(NullPointerException.class, () -> AnfitrionManager.generarReseña(null, sc));
     }
+
+        @Test
+        @DisplayName("manejarIncidentes procesa y resuelve un reporte pendiente")
+        void testManejarIncidentesConReporte() {
+            Anfitrion anfitrion = new Anfitrion("Anfitrion", 1);
+            Reporte reporte = new Reporte(null, "Incidente de prueba");
+            anfitrion.getReportes().add(reporte);
+            assertDoesNotThrow(() -> AnfitrionManager.manejarIncidentes(anfitrion));
+            assertTrue(reporte.isResuelto());
+        }
 }

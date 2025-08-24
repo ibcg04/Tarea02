@@ -78,4 +78,16 @@ class HuespedTest {
         ArrayList<Propiedad> propiedades = huesped.buscarPropiedades("Quito", 4);
         assertNotNull(propiedades);
     }
+
+    @Test
+    @DisplayName("Cancelar reserva libera la unidad ocupada")
+    void testCancelarReserva() {
+        Unidad unidad = new Unidad();
+        unidad.setEstadoAlojamiento(EstadoAlojamiento.DISPONIBLE);
+        Huesped huesped = new Huesped("Maria", 2);
+        huesped.reservar(unidad);
+        huesped.cancelarReserva();
+        assertNull(huesped.getUnidadOcupada());
+        assertEquals(EstadoAlojamiento.DISPONIBLE, unidad.getEstadoAlojamiento());
+    }
 }
