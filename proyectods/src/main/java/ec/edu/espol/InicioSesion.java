@@ -6,6 +6,10 @@ import ec.edu.espol.modelo.BaseDatos;
 import ec.edu.espol.modelo.Huesped;
 
 public class InicioSesion {
+
+    private InicioSesion() {
+        throw new IllegalStateException("Utility class");
+    }
     public static void iniciarSesionHuesped(Scanner sc) {
         System.out.println("==========Inicio de sesión Huesped==========");
         BaseDatos db = BaseDatos.getDataBase();
