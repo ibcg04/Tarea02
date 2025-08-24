@@ -90,14 +90,9 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
         }
         return new Reseña(calificacion, descripcion, this);
     }
-
-    public Reseña reseñar(int calificacion, String descripcion, Usuario autor){
-        if (descripcion == null) {
-            System.out.println("[ADVERTENCIA] Descripción de reseña nula. Se retorna reseña vacía.");
-            return new Reseña(calificacion, "", autor);
-        }
-        return new Reseña(calificacion, descripcion, autor);
-    }
+public Reseña reseñar(int calificacion, String descripcion, Usuario autor){
+    return Reseña.of(calificacion, descripcion, autor);
+}
 
 
     @Override
