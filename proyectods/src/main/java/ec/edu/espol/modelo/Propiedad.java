@@ -110,5 +110,9 @@ public class Propiedad {
         }
     }
 
+    public void setServicios(ArrayList<Servicio> servicios) {
+        this.servicios = servicios;
+    }
+
     
 }
