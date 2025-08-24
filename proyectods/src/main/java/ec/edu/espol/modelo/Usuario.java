@@ -3,9 +3,21 @@ package ec.edu.espol.modelo;
 import java.util.ArrayList;
 
 public class Usuario {
+    // Hide Delegate: Métodos para encapsular acceso a campos internos
+    protected String obtenerNombre() {
+        return getNombre();
+    }
+
+    protected int obtenerID() {
+        return getID();
+    }
+
+    protected java.util.List<Reseña> obtenerReseñas() {
+        return getReseñas();
+    }
     private String nombre;
     private final int id;
-    private ArrayList<Reseña> reseñas;
+    private ArrayList<Reseña> reseñas = new ArrayList<>();
 
     /* Getters y Setters */
     public String getNombre() {
@@ -15,11 +27,10 @@ public class Usuario {
         this.nombre = nombre;
     }
     public ArrayList<Reseña> getReseñas() {
-        return new ArrayList<>(reseñas);
+        return reseñas;
     }
     public void setReseñas(ArrayList<Reseña> reseñas) {
-        if (reseñas == null) throw new IllegalArgumentException("La lista de reseñas no puede ser nula");
-        this.reseñas = new ArrayList<>(reseñas);
+        this.reseñas = reseñas;
     }
     public int getID() {
         return id;

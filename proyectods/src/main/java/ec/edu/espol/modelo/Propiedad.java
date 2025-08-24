@@ -3,6 +3,22 @@ package ec.edu.espol.modelo;
 import java.util.ArrayList;
 
 public class Propiedad {
+    // Hide Delegate: Métodos para encapsular acceso a campos internos
+    protected java.util.List<Unidad> obtenerUnidades() {
+        return getUnidades();
+    }
+
+    protected Anfitrion obtenerPropietario() {
+        return getPropietario();
+    }
+
+    protected java.util.List<Reseña> obtenerReseñas() {
+        return getReseñas();
+    }
+
+    protected java.util.List<Servicio> obtenerServicios() {
+        return getServicios();
+    }
     private final String ubicacion;
     private ArrayList<Unidad> unidades;
     private Anfitrion propietario;

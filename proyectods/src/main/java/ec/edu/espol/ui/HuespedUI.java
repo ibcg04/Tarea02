@@ -155,39 +155,39 @@
         int enumeration = 1;
         if (unidades.isEmpty()) {
             System.out.println(MSG_NO_UNIDADES);
-        } else {
-            System.out.println("Unidades disponibles:");
-            for (Unidad unidad : unidades) {
-                System.out.println("Unidad# " + enumeration);
-                enumeration++;
-                unidad.mostrarDetalles();
+            return;
+        }
+        System.out.println("Unidades disponibles:");
+        for (Unidad unidad : unidades) {
+            System.out.println("Unidad# " + enumeration);
+            enumeration++;
+            unidad.mostrarDetalles();
+        }
+        System.out.println("¿Desea reservar alguna de estas unidades? (S/N)");
+        String respuesta = sc.nextLine().trim().toUpperCase();
+        if (!respuesta.equals("S")) {
+            System.out.println(MSG_NO_RESERVA);
+            return;
+        }
+        System.out.print("Seleccione la unidad que desea reservar (1 a " + unidades.size() + "): ");
+        int opcionUnidad = -1;
+        while (true) {
+            if (!sc.hasNextInt()) {
+                System.out.println(MSG_ENTRADA_INVALIDA);
+                sc.nextLine();
+                continue;
             }
-            System.out.println("¿Desea reservar alguna de estas unidades? (S/N)");
-            String respuesta = sc.nextLine().trim().toUpperCase();
-            if (respuesta.equals("S")) {
-                System.out.print("Seleccione la unidad que desea reservar (1 a " + unidades.size() + "): ");
-                int opcionUnidad = -1;
-                while (true) {
-                    if (sc.hasNextInt()) {
-                        opcionUnidad = sc.nextInt();
-                        sc.nextLine();
-                        if (opcionUnidad >= 1 && opcionUnidad <= unidades.size()) {
-                            break;
-                        } else {
-                            System.out.println(MSG_NUMERO_FUERA_RANGO);
-                        }
-                    } else {
-                        System.out.println(MSG_ENTRADA_INVALIDA);
-                        sc.nextLine();
-                    }
-                }
-                Unidad unidadSeleccionada = unidades.get(opcionUnidad - 1);
-                HuespedManager.reservarUnidad(huesped, unidadSeleccionada);
-                System.out.println(MSG_RESERVA_EXITOSA);
+            opcionUnidad = sc.nextInt();
+            sc.nextLine();
+            if (opcionUnidad >= 1 && opcionUnidad <= unidades.size()) {
+                break;
             } else {
-                System.out.println(MSG_NO_RESERVA);
+                System.out.println(MSG_NUMERO_FUERA_RANGO);
             }
         }
+        Unidad unidadSeleccionada = unidades.get(opcionUnidad - 1);
+        HuespedManager.reservarUnidad(huesped, unidadSeleccionada);
+        System.out.println(MSG_RESERVA_EXITOSA);
     }
 
     /**

@@ -5,6 +5,33 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Anfitrion extends Usuario implements ResuelveReporte {
+    // Devuelve propiedades en una ubicación con al menos una reseña igual o mayor a la calificación
+    public ArrayList<Propiedad> buscarPropiedadesPorUbicacionYCalificacion(String ubicacion, int calificacion) {
+        ArrayList<Propiedad> resultado = new ArrayList<>();
+        for (Propiedad p : obtenerPropiedades()) {
+            if (p.getUbicacion().equals(ubicacion)) {
+                for (Reseña r : p.getReseñas()) {
+                    if (r.getCalificacion() >= calificacion) {
+                        resultado.add(p);
+                        break;
+                    }
+                }
+            }
+        }
+        return resultado;
+    }
+    // Hide Delegate: Métodos para encapsular acceso a colecciones internas
+    protected java.util.List<Propiedad> obtenerPropiedades() {
+        return getPropiedades();
+    }
+
+    protected java.util.List<Huesped> obtenerHistorialOcupantes() {
+        return getHistorialOcupantes();
+    }
+
+    protected java.util.Deque<Reporte> obtenerReportes() {
+        return reportes;
+    }
     private ArrayList<Propiedad> propiedades;
     private ArrayList<Huesped> historialOcupantes;
     private ArrayDeque<Reporte> reportes;
@@ -142,7 +169,6 @@ public void agregarPropiedad(Propiedad propiedad) {
         }
     }
 
-    @Override
     public void mostrarReseñas() {
         System.out.println("Reseñas recibidas:");
         for (Propiedad p : propiedades) {

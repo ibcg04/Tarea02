@@ -1,6 +1,22 @@
 package ec.edu.espol.modelo;
 
 public class Unidad {
+    // Hide Delegate: Métodos para encapsular acceso a campos internos
+    protected Propiedad obtenerPropiedad() {
+        return getPropiedad();
+    }
+
+    protected Huesped obtenerOcupante() {
+        return getOcupante();
+    }
+
+    protected EstadoAlojamiento obtenerEstadoAlojamiento() {
+        return getEstadoAlojamiento();
+    }
+
+    protected double obtenerPrecio() {
+        return getPrecio();
+    }
     private double precio;
     private EstadoAlojamiento estado;
     private Huesped ocupante;

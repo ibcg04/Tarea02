@@ -4,6 +4,39 @@ package ec.edu.espol.modelo;
 import java.util.ArrayList;
 
 public class Huesped extends Usuario {
+    // Hide Delegate para acceso a anfitriones
+    protected java.util.Collection<Anfitrion> getAnfitriones() {
+        return BaseDatos.getDataBase().getAnfitriones().values();
+    }
+    // Hide Delegate para reportar
+    private Anfitrion getAnfitrionParaReporte() {
+        if (unidadOcupada != null && unidadOcupada.getPropiedad() != null) {
+            return unidadOcupada.getPropiedad().getPropietario();
+        }
+        return null;
+    }
+    public ArrayList<Propiedad> getPropiedadesDeUnidadOcupada() {
+        if (unidadOcupada != null && unidadOcupada.getPropiedad() != null) {
+            ArrayList<Propiedad> props = new ArrayList<>();
+            props.add(unidadOcupada.getPropiedad());
+            return props;
+        }
+        return new ArrayList<>();
+    }
+
+    public Anfitrion getAnfitrionDeUnidadOcupada() {
+        if (unidadOcupada != null && unidadOcupada.getPropiedad() != null) {
+            return unidadOcupada.getPropiedad().getPropietario();
+        }
+        return null;
+    }
+
+    public void agregarAHistorialOcupantesDeAnfitrion() {
+        Anfitrion anfitrion = getAnfitrionDeUnidadOcupada();
+        if (anfitrion != null && anfitrion.getHistorialOcupantes() != null) {
+            anfitrion.getHistorialOcupantes().add(this);
+        }
+    }
     private Unidad unidadOcupada;
     private ArrayList<Unidad> historialReservas;
  
@@ -46,9 +79,7 @@ public class Huesped extends Usuario {
             unidad.setEstadoAlojamiento(EstadoAlojamiento.RESERVADA);
             pagar(unidad.getPrecio());
             historialReservas.add(unidad);
-            if (unidad.getPropiedad() != null && unidad.getPropiedad().getPropietario() != null && unidad.getPropiedad().getPropietario().getHistorialOcupantes() != null) {
-                unidad.getPropiedad().getPropietario().getHistorialOcupantes().add(this);
-            }
+            agregarAHistorialOcupantesDeAnfitrion();
             System.out.println("Reserva exitosa");
         } else {
             System.out.println("La unidad no está disponible para reservar.");
@@ -76,17 +107,12 @@ public class Huesped extends Usuario {
             System.out.println("[ADVERTENCIA] Mensaje nulo. No se puede reportar.");
             return;
         }
-        if (unidadOcupada == null || unidadOcupada.getPropiedad() == null
-                || unidadOcupada.getPropiedad().getPropietario() == null) {
+        Anfitrion anfitrion = getAnfitrionParaReporte();
+        if (anfitrion == null) {
             System.out.println("No hay una unidad/propiedad/anfitrión asociado para reportar.");
-            return; 
+            return;
         }
         Reporte reporte = new Reporte(this, mensaje);
-
-        //Construir la cadena
-        Anfitrion anfitrion = unidadOcupada.getPropiedad().getPropietario();
-
-        // disparar la cadena desde el anfitrión
         System.out.println("Reportando incidente...");
         anfitrion.resolverReporte(reporte);
         System.out.println("Reporte enviado a la cola de incidentes del anfitrión.");
@@ -100,24 +126,15 @@ public class Huesped extends Usuario {
     }
 
     public ArrayList<Propiedad> buscarPropiedades(String ubicacion, int calificacion){
-        //Busca propiedades en la ubicación y con la reseña.
+        // Refactor: delega la búsqueda a Anfitrion para evitar feature envy y long method
         ArrayList<Propiedad> propiedades_nuevas = new ArrayList<>();
         System.out.println("Buscando propiedades...");
-        for(Anfitrion a: BaseDatos.getDataBase().getAnfitriones().values()){
-            for(Propiedad p: a.getPropiedades()){
-                if(p.getUbicacion().equals(ubicacion)){
-                    for(Reseña r: p.getReseñas()){
-                        if(r.getCalificacion() >= calificacion) 
-                            propiedades_nuevas.add(p);
-                    }
-                   
-                }   
-            }
+        for (Anfitrion a : getAnfitriones()) {
+            propiedades_nuevas.addAll(a.buscarPropiedadesPorUbicacionYCalificacion(ubicacion, calificacion));
         }
-        mostrarPropiedades(propiedades_nuevas); 
+        mostrarPropiedades(propiedades_nuevas);
         return propiedades_nuevas;
-
-        }
+    }
 
     @Override
     public String toString() {
