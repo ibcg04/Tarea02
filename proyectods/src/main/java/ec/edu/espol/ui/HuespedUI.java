@@ -9,6 +9,14 @@
     import java.util.Scanner;
 
     public class HuespedUI {
+
+        // Mensajes constantes para evitar repetición
+    private static final String MSG_ENTRADA_INVALIDA = "Entrada inválida. Por favor, ingrese un número entero.";
+    private static final String MSG_NUMERO_FUERA_RANGO = "Número fuera de rango. Intente nuevamente.";
+    private static final String MSG_NO_UNIDADES = "No hay unidades disponibles en esta propiedad.";
+    private static final String MSG_RESERVA_EXITOSA = "Reserva realizada con éxito.";
+    private static final String MSG_NO_RESERVA = "No se realizó ninguna reserva.";
+    private static final String MSG_NO_PROPIEDADES = "No hay propiedades disponibles.";
     /**
      * Menú principal de búsqueda de propiedades para el huésped.
      */
@@ -27,7 +35,7 @@
                 opcion = sc.nextInt();
                 sc.nextLine();
             } else {
-                System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                System.out.println(MSG_ENTRADA_INVALIDA);
                 sc.nextLine();
             }
         }
@@ -52,7 +60,7 @@
                         if (precioMaximo >= 1) {
                             break;
                         } else {
-                            System.out.println("Número fuera de rango. Intente nuevamente.");
+                            System.out.println(MSG_NUMERO_FUERA_RANGO);
                         }
                     } else {
                         System.out.println("Entrada inválida. Por favor, ingrese un número válido.");
@@ -146,7 +154,7 @@
     private static void mostrarUnidadesYReservar(ArrayList<Unidad> unidades, Huesped huesped, Scanner sc) {
         int enumeration = 1;
         if (unidades.isEmpty()) {
-            System.out.println("No se encontraron unidades disponibles.");
+            System.out.println(MSG_NO_UNIDADES);
         } else {
             System.out.println("Unidades disponibles:");
             for (Unidad unidad : unidades) {
@@ -166,18 +174,18 @@
                         if (opcionUnidad >= 1 && opcionUnidad <= unidades.size()) {
                             break;
                         } else {
-                            System.out.println("Número fuera de rango. Intente nuevamente.");
+                            System.out.println(MSG_NUMERO_FUERA_RANGO);
                         }
                     } else {
-                        System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                        System.out.println(MSG_ENTRADA_INVALIDA);
                         sc.nextLine();
                     }
                 }
                 Unidad unidadSeleccionada = unidades.get(opcionUnidad - 1);
                 HuespedManager.reservarUnidad(huesped, unidadSeleccionada);
-                System.out.println("Reserva realizada con éxito.");
+                System.out.println(MSG_RESERVA_EXITOSA);
             } else {
-                System.out.println("No se realizó ninguna reserva.");
+                System.out.println(MSG_NO_RESERVA);
             }
         }
     }
@@ -189,7 +197,7 @@
         System.out.println("Reservando Propiedad...");
         ArrayList<Propiedad> propiedades = HuespedManager.obtenerPropiedadesDisponibles();
         if (propiedades.isEmpty()) {
-            System.out.println("No hay propiedades disponibles para reservar.");
+            System.out.println(MSG_NO_PROPIEDADES);
             return;
         }
         int enumeration = 1;
@@ -206,17 +214,17 @@
                 if (opcionReserva >= 1 && opcionReserva <= propiedades.size()) {
                     break;
                 } else {
-                    System.out.println("Número fuera de rango. Intente nuevamente.");
+                    System.out.println(MSG_NUMERO_FUERA_RANGO);
                 }
             } else {
-                System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                System.out.println(MSG_ENTRADA_INVALIDA);
                 sc.nextLine();
             }
         }
         Propiedad propiedadSeleccionada = propiedades.get(opcionReserva - 1);
         propiedadSeleccionada.mostrarUnidades();
         if (propiedadSeleccionada.getUnidades().isEmpty()) {
-            System.out.println("No hay unidades disponibles en esta propiedad.");
+            System.out.println(MSG_NO_UNIDADES);
             return;
         }
         int opcionUnidad = -1;
@@ -228,16 +236,16 @@
                 if (opcionUnidad >= 1 && opcionUnidad <= propiedadSeleccionada.getUnidades().size()) {
                     break;
                 } else {
-                    System.out.println("Número fuera de rango. Intente nuevamente.");
+                    System.out.println(MSG_NUMERO_FUERA_RANGO);
                 }
             } else {
-                System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                System.out.println(MSG_ENTRADA_INVALIDA);
                 sc.nextLine();
             }
         }
         Unidad unidadSeleccionada = propiedadSeleccionada.getUnidades().get(opcionUnidad - 1);
         HuespedManager.reservarUnidad(huesped, unidadSeleccionada);
-        System.out.println("Reserva realizada con éxito.");
+    System.out.println(MSG_RESERVA_EXITOSA);
     }
 
     /**
@@ -254,10 +262,10 @@
                 if (calificacion >= 1 && calificacion <= 5) {
                     break;
                 } else {
-                    System.out.println("Número fuera de rango de calificación. Intente nuevamente.");
+                    System.out.println(MSG_NUMERO_FUERA_RANGO);
                 }
             } else {
-                System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                System.out.println(MSG_ENTRADA_INVALIDA);
                 sc.nextLine();
             }
         }
@@ -265,9 +273,9 @@
         String descripcion = sc.nextLine();
         boolean exito = HuespedManager.generarReseña(huesped, calificacion, descripcion);
         if (exito) {
-            System.out.println("Reseña generada exitosamente.");
+            System.out.println(MSG_RESERVA_EXITOSA);
         } else {
-            System.out.println("No tienes una unidad ocupada para generar una reseña.");
+            System.out.println(MSG_NO_RESERVA);
         }
     }
 
