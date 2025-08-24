@@ -1,7 +1,6 @@
 package ec.edu.espol;
 import java.util.Scanner;
 
-import ec.edu.espol.logica.HuespedManager;
 import ec.edu.espol.modelo.Huesped;
 import ec.edu.espol.ui.HuespedUI;
 

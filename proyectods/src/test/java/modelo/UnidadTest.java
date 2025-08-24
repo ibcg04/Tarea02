@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import ec.edu.espol.modelo.Unidad;
+import ec.edu.espol.modelo.Huesped;
+import ec.edu.espol.modelo.EstadoAlojamiento;
 
 class UnidadTest {
     private Unidad unidad;
@@ -48,5 +51,13 @@ class UnidadTest {
     void testSetPropiedadNula() {
         unidad.setPropiedad(null);
         assertNull(unidad.getPropiedad());
+    }
+    
+    @Test
+    @DisplayName("estaDisponible retorna true si la unidad está disponible")
+    void testEstaDisponible() {
+        Unidad unidad = new Unidad();
+        unidad.setEstadoAlojamiento(EstadoAlojamiento.DISPONIBLE);
+        assertTrue(unidad.estaDisponible());
     }
 }

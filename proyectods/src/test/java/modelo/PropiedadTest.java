@@ -43,4 +43,15 @@ class PropiedadTest {
         Propiedad p = new Propiedad("Quito", new ArrayList<>(), null, new ArrayList<>());
         assertDoesNotThrow(() -> p.agregarReseña(null));
     }
+
+    @Test
+    @DisplayName("mostrarUnidades imprime las unidades correctamente")
+    void testMostrarUnidades() {
+        Propiedad p = new Propiedad("Quito", new ArrayList<>(), null, new ArrayList<>());
+        Unidad u1 = new Unidad();
+        Unidad u2 = new Unidad();
+        p.agregarUnidad(u1);
+        p.agregarUnidad(u2);
+        assertDoesNotThrow(() -> p.mostrarUnidades());
+    }
 }
