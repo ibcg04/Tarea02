@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Anfitrion extends Usuario implements ResuelveReporte {
-    // Devuelve propiedades en una ubicación con al menos una reseña igual o mayor a la calificación
     public ArrayList<Propiedad> buscarPropiedadesPorUbicacionYCalificacion(String ubicacion, int calificacion) {
         ArrayList<Propiedad> resultado = new ArrayList<>();
         for (Propiedad p : obtenerPropiedades()) {
@@ -20,7 +19,7 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
         }
         return resultado;
     }
-    // Hide Delegate: Métodos para encapsular acceso a colecciones internas
+
     protected java.util.List<Propiedad> obtenerPropiedades() {
         return getPropiedades();
     }
@@ -35,9 +34,8 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
     private ArrayList<Propiedad> propiedades;
     private ArrayList<Huesped> historialOcupantes;
     private ArrayDeque<Reporte> reportes;
-    private ResuelveReporte nextHandler; //Chain of Responsibility
+    private ResuelveReporte nextHandler; 
     
-    /* Getters Y Setters */
     public ArrayList<Huesped> getHistorialOcupantes() {
         if (historialOcupantes == null) historialOcupantes = new ArrayList<>();
         return historialOcupantes;
@@ -154,7 +152,6 @@ public class Anfitrion extends Usuario implements ResuelveReporte {
 public String toString() {
     return "Anfitrion: " + getNombre() + " (ID: " + getID() + ")";
 }
-// Agrega dentro de la clase Anfitrion
 
 public void agregarPropiedad(Propiedad propiedad) {
     propiedades.add(propiedad);

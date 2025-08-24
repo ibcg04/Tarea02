@@ -17,13 +17,11 @@ public class BaseDatos {
         return huespedes;
     }
 
-    /* Constructor privado */
     private BaseDatos() {
         anfitriones = new HashMap<Integer, Anfitrion>();
         huespedes = new HashMap<Integer, Huesped>();
     }
 
-    /* Obtener la instancia única de DataBase */
     public static BaseDatos getDataBase() {
         if (database == null) {
             database = new BaseDatos();
@@ -31,24 +29,20 @@ public class BaseDatos {
         return database;
     }
 
-    /* Agregar un nuevo anfitrión */
     public void agregarAnfitrion(Anfitrion anfitrion) {
         anfitriones.put(anfitrion.getID(), anfitrion);
     }
 
-    /* Agregar un nuevo huésped */
     public void agregarHuesped(Huesped huesped) {
         huespedes.put(huesped.getID(), huesped);
     }
 
-    /* Mostrar anfitriones */
     public void mostrarAnfitriones() {
         for (Anfitrion a : anfitriones.values()) {
             System.out.println(a);
         }
     }
 
-    /* Mostrar huéspedes */
     public void mostrarHuespedes() {
         for (Huesped h : huespedes.values()) {
             System.out.println(h);

@@ -25,17 +25,17 @@ public class AnfitrionManager {
         
         if (sc.hasNextInt()) {
             opcionPropiedad = sc.nextInt();
-            sc.nextLine(); // limpiar buffer
+            sc.nextLine(); 
             
             if (opcionPropiedad >= 1 && opcionPropiedad <= anfitrion.getPropiedades().size()) {
-                break; // entrada válida, salir del bucle
+                break; 
             } else {
                 System.out.println("Número fuera de rango. Intente nuevamente.");
             }
             
         } else {
             System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
-            sc.nextLine(); // limpiar entrada inválida
+            sc.nextLine(); 
         }
         
         }
