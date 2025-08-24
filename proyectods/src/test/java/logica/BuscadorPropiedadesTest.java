@@ -27,7 +27,6 @@ class BuscadorPropiedadesTest {
 
     @BeforeEach
     void setUp() {
-        // Limpia la base de datos antes de cada test
         BaseDatos.getDataBase().getAnfitriones().clear();
 
         anfitrion = new Anfitrion("Juan", 1);
@@ -37,7 +36,7 @@ class BuscadorPropiedadesTest {
             public boolean estaDisponible() { return true; }
         };
         unidad.setPrecio(100);
-        unidad.setPropiedad(null); // Se asigna después
+        unidad.setPropiedad(null);
         unidades.add(unidad);
 
         ArrayList<Reseña> reseñas = new ArrayList<>();
