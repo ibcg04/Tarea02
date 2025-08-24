@@ -6,6 +6,7 @@ import modelo.BaseDatos;
 import modelo.Huesped;
 
 public class InicioSesion {
+    
     public static void iniciarSesionHuesped(Scanner sc) {
         System.out.println("==========Inicio de sesión Huesped==========");
         BaseDatos db = BaseDatos.getDataBase();
