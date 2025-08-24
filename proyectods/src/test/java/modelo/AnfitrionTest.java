@@ -12,6 +12,9 @@ import ec.edu.espol.modelo.Anfitrion;
 import ec.edu.espol.modelo.Regla;
 import ec.edu.espol.modelo.Reseña;
 import ec.edu.espol.modelo.Usuario;
+import ec.edu.espol.modelo.Propiedad;
+import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AnfitrionTest {
     private Anfitrion anfitrion;
@@ -83,4 +86,14 @@ class AnfitrionTest {
         Reseña r = anfitrion.reseñar(5, null);
         assertEquals("", r.getDescripcion());
     }
+
+        @Test
+        @DisplayName("Eliminar propiedad la elimina de la lista")
+        void testEliminarPropiedad() {
+            Anfitrion anfitrion = new Anfitrion("Juan", 1);
+            Propiedad propiedad = new Propiedad("Quito", new ArrayList<>(), anfitrion, new ArrayList<>());
+            anfitrion.agregarPropiedad(propiedad);
+            anfitrion.eliminarPropiedad(propiedad);
+            assertFalse(anfitrion.getPropiedades().contains(propiedad));
+        }
 }

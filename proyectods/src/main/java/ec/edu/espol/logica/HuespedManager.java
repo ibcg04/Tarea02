@@ -1,19 +1,12 @@
 package ec.edu.espol.logica;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import ec.edu.espol.MenuHuesped;
 import ec.edu.espol.modelo.Anfitrion;
 import ec.edu.espol.modelo.BaseDatos;
-import ec.edu.espol.modelo.Casa;
-import ec.edu.espol.modelo.DepartamentoCompleto;
-import ec.edu.espol.modelo.HabitacionPrivada;
 import ec.edu.espol.modelo.Huesped;
 import ec.edu.espol.modelo.Propiedad;
-import ec.edu.espol.modelo.Servicio;
 import ec.edu.espol.modelo.Unidad;
-import ec.edu.espol.logica.BuscadorPropiedades;
 
 public class HuespedManager {
     public HuespedManager(){
