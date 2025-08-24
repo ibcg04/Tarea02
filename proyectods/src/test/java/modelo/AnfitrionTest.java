@@ -12,6 +12,9 @@ import ec.edu.espol.modelo.Anfitrion;
 import ec.edu.espol.modelo.Regla;
 import ec.edu.espol.modelo.Reseña;
 import ec.edu.espol.modelo.Usuario;
+import ec.edu.espol.modelo.Propiedad;
+import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AnfitrionTest {
     private Anfitrion anfitrion;
