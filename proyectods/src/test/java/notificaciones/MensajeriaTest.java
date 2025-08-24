@@ -1,9 +1,8 @@
 package notificaciones;
 
 import org.junit.jupiter.api.Test;
-
 import ec.edu.espol.notificaciones.Mensajeria;
-
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import org.junit.jupiter.api.DisplayName;
 
 class MensajeriaTest {
@@ -11,8 +10,7 @@ class MensajeriaTest {
     @DisplayName("Notifica por mensajería con mensaje válido")
     void testNotificar() {
         Mensajeria m = new Mensajeria(null);
-        m.notificar("Hola");
-        // Verifica que no lanza excepción y se imprime el mensaje
+        assertDoesNotThrow(() -> m.notificar("Hola"));
     }
 
     @Test

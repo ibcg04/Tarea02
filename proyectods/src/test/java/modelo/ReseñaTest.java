@@ -27,4 +27,13 @@ class ReseñaTest {
         Reseña r = new Reseña(4, null, autor);
         assertEquals("", r.getDescripcion());
     }
+
+    @Test
+    @DisplayName("setCalificacion actualiza la calificación correctamente")
+    void testSetCalificacion() {
+        Usuario autor = new Usuario("Ana", 1);
+        Reseña r = new Reseña(4, "Muy bien", autor);
+        r.setCalificacion(2);
+        assertEquals(2, r.getCalificacion());
+    }
 }

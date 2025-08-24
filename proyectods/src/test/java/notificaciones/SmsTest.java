@@ -12,8 +12,7 @@ class SmsTest {
     @DisplayName("Notifica por SMS con mensaje válido")
     void testNotificar() {
         Sms sms = new Sms(null);
-        sms.notificar("Hola");
-        // Verifica que no lanza excepción y se imprime el mensaje
+        assertDoesNotThrow(() -> sms.notificar("Hola"));
     }
 
     @Test

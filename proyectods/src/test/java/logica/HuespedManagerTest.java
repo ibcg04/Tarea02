@@ -1,30 +1,14 @@
 package logica;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import ec.edu.espol.logica.HuespedManager;
 import ec.edu.espol.logica.BuscadorPropiedades;
 import ec.edu.espol.modelo.*;
-
+import ec.edu.espol.logica.HuespedManager;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class HuespedManagerTest {
-    private HuespedManager manager;
-    private Huesped huesped;
-    private Scanner sc;
-
-    @BeforeEach
-    void setUp() {
-        manager = new HuespedManager();
-        huesped = new Huesped("Test", 1);
-        sc = new Scanner(System.in);
-    }
-
     @Test
     @DisplayName("Retorna lista de unidades con precio menor o igual al máximo (caso normal)")
     void testPrecioMaxNormal() {
@@ -57,5 +41,20 @@ class HuespedManagerTest {
     @DisplayName("Lanza excepción si la ubicación es nula")
     void testUbicacionSearchNula() {
         assertThrows(NullPointerException.class, () -> BuscadorPropiedades.buscarPorUbicacion(null));
+    }
+
+    @Test
+    @DisplayName("generarReseña retorna true si el huésped tiene unidad ocupada")
+    void testGenerarReseñaTrue() {
+        Anfitrion anfitrion = new Anfitrion("Anfitrión", 1);
+        Propiedad propiedad = new Propiedad("Quito", new ArrayList<>(), anfitrion, new ArrayList<>());
+        Unidad unidad = new Unidad();
+        unidad.setPropiedad(propiedad);
+        unidad.setEstadoAlojamiento(EstadoAlojamiento.DISPONIBLE);
+        Huesped huesped = new Huesped("María", 2);
+        propiedad.getUnidades().add(unidad);
+        huesped.reservar(unidad);
+        boolean resultado = HuespedManager.generarReseña(huesped, 5, "Excelente");
+        assertTrue(resultado);
     }
 }

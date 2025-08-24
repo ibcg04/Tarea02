@@ -1,9 +1,7 @@
 package notificaciones;
 
 import org.junit.jupiter.api.Test;
-
 import ec.edu.espol.notificaciones.Email;
-
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,8 +10,7 @@ class EmailTest {
     @DisplayName("Notifica por correo electrónico con mensaje válido")
     void testNotificar() {
         Email email = new Email(null);
-        email.notificar("Hola");
-        // Verifica que no lanza excepción y se imprime el mensaje
+        assertDoesNotThrow(() -> email.notificar("Hola"));
     }
 
     @Test
